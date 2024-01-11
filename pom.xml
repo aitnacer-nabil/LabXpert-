@@ -52,6 +52,7 @@
 					<image>
 						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
 					</image>
+
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
