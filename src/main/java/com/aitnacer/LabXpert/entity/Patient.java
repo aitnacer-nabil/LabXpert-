@@ -1,24 +1,31 @@
 package com.aitnacer.LabXpert.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@ToString(callSuper = true)
 @Entity
-
-public class Patient {
+@Table(name = "patients")
+public class Patient extends Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    private String prenom;
-    private String Adresse;
-    private String telephone;
+
+
+
+    public Patient() {
+        this.setRole(UserRole.PATIENT);
+    }
+
+
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
-    private Set<Echantillon> echantillons = new HashSet<>();
+    private List<Echantillon> echantillons;
 
 }

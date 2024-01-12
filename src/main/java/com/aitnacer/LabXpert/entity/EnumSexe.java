@@ -1,7 +1,6 @@
 package com.aitnacer.LabXpert.entity;
 
-public
-enum  EnumSexe {
+public enum  EnumSexe {
     MALE,
     FEMAL
 }

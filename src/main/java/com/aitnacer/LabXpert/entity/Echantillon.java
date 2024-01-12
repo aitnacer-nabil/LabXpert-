@@ -10,9 +10,12 @@ public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateDePrelevement;
+    private LocalDateTime dateDeReception;
+    private String echantillonCode;
     @ManyToOne
     private Patient patient;
+    @ManyToOne
+    private Technicien techenicien;
     @OneToMany(mappedBy = "echantillon",fetch = FetchType.EAGER)
     private List<Analyse> analyses;
 }

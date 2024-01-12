@@ -14,9 +14,12 @@ public class Analyse {
     private String Commentaire;
     @ManyToOne
     private Echantillon echantillon;
-    @ManyToOne
-    private Planification planification;
+    @Enumerated(EnumType.STRING)
+    private AnalyseStatus status;
+
     @OneToMany(mappedBy = "analyse",fetch = FetchType.EAGER)
     private List<TypeAnalyse> typeAnalyses;
+    @OneToOne
+    private Doctor doctor;
 
 }
