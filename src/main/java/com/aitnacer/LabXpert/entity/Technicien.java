@@ -24,4 +24,12 @@ public class Technicien extends Utilisateur{
     }
     @OneToMany(mappedBy = "techenicien",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
+
+    @Override
+    public String toString() {
+        return "Technicien{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' + super.toString() +
+                '}';
+    }
 }

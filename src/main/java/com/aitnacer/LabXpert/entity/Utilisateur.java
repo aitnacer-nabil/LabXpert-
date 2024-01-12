@@ -28,4 +28,17 @@ public abstract class Utilisateur {
 
     public Utilisateur() {
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", Adresse='" + Adresse + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", sexe=" + sexe +
+                ", role=" + role +
+                ", id=" + id +
+                '}';
+    }
 }

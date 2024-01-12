@@ -13,5 +13,11 @@ public class Result {
     private Long id;
     private float value;
 
-
+    @Override
+    public String toString() {
+        return "Result{" +
+                "id=" + id +
+                ", value=" + value +
+                '}';
+    }
 }

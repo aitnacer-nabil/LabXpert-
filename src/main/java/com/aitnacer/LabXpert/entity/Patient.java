@@ -18,14 +18,17 @@ public class Patient extends Utilisateur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     public Patient() {
         this.setRole(UserRole.PATIENT);
     }
 
-
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id + super.toString() +
+                '}';
+    }
 }

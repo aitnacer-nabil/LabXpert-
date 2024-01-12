@@ -1,10 +1,13 @@
 package com.aitnacer.LabXpert.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "typeAnalyse")
+@Data
 public class TypeAnalyse {
 
     @Id
@@ -16,4 +19,11 @@ public class TypeAnalyse {
     @OneToMany(mappedBy = "typeAnalyse")
     private List<Test> tests;
 
+    @Override
+    public String toString() {
+        return "TypeAnalyse{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
+    }
 }

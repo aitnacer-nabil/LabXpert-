@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ToString(callSuper = true)
 @Entity
 @Table(name = "doctors")
 public class Doctor extends Utilisateur{
@@ -23,4 +22,12 @@ public class Doctor extends Utilisateur{
     }
     @OneToOne(mappedBy = "doctor")
     private Analyse analyse;
+
+    @Override
+    public String toString() {
+        return "Doctor{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' + super.toString()+
+                '}';
+    }
 }

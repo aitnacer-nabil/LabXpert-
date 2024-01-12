@@ -1,17 +1,22 @@
 package com.aitnacer.LabXpert.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "analysis")
+@Data
 public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dateDebut;
     private String Commentaire;
+    private String nom;
     @ManyToOne
     private Echantillon echantillon;
     @Enumerated(EnumType.STRING)
@@ -22,4 +27,14 @@ public class Analyse {
     @OneToOne
     private Doctor doctor;
 
+    @Override
+    public String toString() {
+        return "Analyse{" +
+                "id=" + id +
+                ", dateDebut=" + dateDebut +
+                ", Commentaire='" + Commentaire + '\'' +
+                ", nom='" + nom + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }
