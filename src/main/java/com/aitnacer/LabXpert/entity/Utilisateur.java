@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class Utilisateur extends UtilisateurInfo {
 
     private String userName;
     private String password;
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
 
