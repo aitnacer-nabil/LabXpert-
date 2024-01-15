@@ -18,23 +18,23 @@ public class UserService {
     private final ModelMapper modelMapper;
 
 
-    public List<UtilisateurDto> getAllAdministrateurs(){
+    public List<UtilisateurDto> getAllUtilisateur(){
         List<Utilisateur> utilisateurs = userRepository.findByDeletedFalse();
         return  utilisateurs.stream().map(administrateur -> modelMapper.map(administrateur, UtilisateurDto.class)).collect(Collectors.toList());
     }
-    public UtilisateurDto getAdministrateurById(Long id) {
+    public UtilisateurDto getUtilisateurById(Long id) {
         //TODO add exption not found
         Utilisateur administrateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
         return modelMapper.map(administrateur, UtilisateurDto.class);
     }
-    public UtilisateurDto createAdministrateur(UtilisateurDto administrateurDto){
+    public UtilisateurDto createUtilisateur(UtilisateurDto administrateurDto){
         // TODO verification for administrateur
         Utilisateur administrateur = modelMapper.map(administrateurDto, Utilisateur.class);
         Utilisateur administrateurSaved  = userRepository.save(administrateur);
         return  modelMapper.map(administrateurSaved, UtilisateurDto.class);
 
     }
-    public UtilisateurDto updateAdministrateur(Long id , UtilisateurDto administrateurDto){
+    public UtilisateurDto updateUtilisateur(Long id , UtilisateurDto administrateurDto){
         //TODO trow exption not found and validation
         Utilisateur existingdUtilisateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
         //TODO validation
@@ -49,7 +49,7 @@ public class UserService {
         updatedUtilisateur.setId(id);
         return modelMapper.map(updatedUtilisateur, UtilisateurDto.class);
     }
-    public void deleteAdministrateur(Long id){
+    public void deleteUtilisateur(Long id){
         //TODO add exption
         Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
         utilisateur.setDeleted(true);

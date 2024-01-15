@@ -17,28 +17,28 @@ public class UserController {
     final UserService userService;
     @GetMapping
     public ResponseEntity<List<UtilisateurDto>> getAllAdmin(){
-        return ResponseEntity.ok(userService.getAllAdministrateurs());
+        return ResponseEntity.ok(userService.getAllUtilisateur());
     }
     @GetMapping("/{id}")
     public ResponseEntity<UtilisateurDto> getAdminById(@PathVariable(name = "id") Long id) {
-        UtilisateurDto utilisateurDto = userService.getAdministrateurById(id);
+        UtilisateurDto utilisateurDto = userService.getUtilisateurById(id);
         return ResponseEntity.ok(utilisateurDto);
     }
 
     @PostMapping
     public ResponseEntity<UtilisateurDto> createUser( @RequestBody UtilisateurDto userDTO) {
-        UtilisateurDto utilisateurDto = userService.createAdministrateur(userDTO);
+        UtilisateurDto utilisateurDto = userService.createUtilisateur(userDTO);
         return new ResponseEntity<>(utilisateurDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UtilisateurDto> updateUser(@PathVariable("id") Long id,  @RequestBody UtilisateurDto userDTO)  {
-        return ResponseEntity.ok(userService.updateAdministrateur(id, userDTO));
+        return ResponseEntity.ok(userService.updateUtilisateur(id, userDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable("id") Long id)  {
-            userService.deleteAdministrateur(id);
+            userService.deleteUtilisateur(id);
         return ResponseEntity.ok("User with id: " + id + " has been deleted successfully!");
     }
 }
