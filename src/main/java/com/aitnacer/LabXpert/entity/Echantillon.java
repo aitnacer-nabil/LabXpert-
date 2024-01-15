@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "echantillons")
 @Data
+@NoArgsConstructor
 public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +20,7 @@ public class Echantillon {
     @ManyToOne
     private Patient patient;
     @ManyToOne
-    private Technicien techenicien;
+    private Utilisateur Utilisateur;
     @OneToMany(mappedBy = "echantillon",fetch = FetchType.EAGER)
     private List<Analyse> analyses;
 

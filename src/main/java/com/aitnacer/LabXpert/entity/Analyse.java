@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "analysis")
 @Data
+@NoArgsConstructor
 public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +27,7 @@ public class Analyse {
     @OneToMany(mappedBy = "analyse",fetch = FetchType.EAGER)
     private List<TypeAnalyse> typeAnalyses;
     @OneToOne
-    private Doctor doctor;
+    private Utilisateur utilisateur;
 
     @Override
     public String toString() {

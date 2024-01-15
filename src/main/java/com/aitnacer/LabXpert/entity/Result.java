@@ -1,11 +1,13 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Result {
 
     @Id

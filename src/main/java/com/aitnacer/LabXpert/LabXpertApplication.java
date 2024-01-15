@@ -1,16 +1,12 @@
 package com.aitnacer.LabXpert;
 
 
-import com.aitnacer.LabXpert.entity.*;
 import com.aitnacer.LabXpert.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 @SpringBootApplication
@@ -20,22 +16,10 @@ public class LabXpertApplication implements CommandLineRunner {
         SpringApplication.run(LabXpertApplication.class, args);
     }
 
-    @Autowired
-    AdministrateurRepository administrateurRepository;
-    @Autowired
-    AnalyseRepository analyseRepository;
-    @Autowired
-    DoctorRepository doctorRepository;
-    @Autowired
-    PatientRepository patientRepository;
-    @Autowired
-    TechnicienRepository technicienRepository;
-    @Autowired
-    EchantillonRepository echantillonRepository;
 
 
     @Override
-    @Transactional
+
 
     public void run(String... args) throws Exception {
         // Création d'un administrateur
