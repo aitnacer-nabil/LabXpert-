@@ -41,6 +41,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.eunjae.android.modelmapper</groupId>
+			<artifactId>ModelMapper</artifactId>
+			<version>1.0.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
