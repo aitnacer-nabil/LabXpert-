@@ -25,7 +25,8 @@ public abstract class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     public Utilisateur() {
     }
 
