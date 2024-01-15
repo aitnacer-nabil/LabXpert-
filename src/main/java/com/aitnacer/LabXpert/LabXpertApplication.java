@@ -38,20 +38,20 @@ public class LabXpertApplication implements CommandLineRunner {
     @Transactional
 
     public void run(String... args) throws Exception {
-        // Création d'un administrateur
-//		Administrateur administrateur = new Administrateur();
-//		administrateur.setNom("NomAdmin");
-//		administrateur.setPrenom("PrenomAdmin");
-//		administrateur.setAdresse("AdresseAdmin");
-//		administrateur.setTelephone("0123456789");
-//		administrateur.setSexe(EnumSexe.MALE);
-//		administrateur.setUserName("AdminUser");
-//		administrateur.setPassword("AdminPass");
-//		System.out.println(administrateurRepository.save(administrateur));
-//		//administrateurRepository.deleteById(1L);
-//		administrateur.setPrenom("Updated Prenom");
-//
-//		System.out.println(administrateurRepository.save(administrateur));
+
+		Administrateur administrateur = new Administrateur();
+		administrateur.setNom("NomAdmin");
+		administrateur.setPrenom("PrenomAdmin");
+		administrateur.setAdresse("AdresseAdmin");
+		administrateur.setTelephone("0123456789");
+		administrateur.setSexe(EnumSexe.MALE);
+		administrateur.setUserName("AdminUser");
+		administrateur.setPassword("AdminPass");
+		System.out.println(administrateurRepository.save(administrateur));
+		//administrateurRepository.deleteById(1L);
+		administrateur.setPrenom("Updated Prenom");
+
+		System.out.println(administrateurRepository.save(administrateur));
         // Création d'un docteur
         Doctor doctor = new Doctor();
         doctor.setNom("NomDoctor");
@@ -61,7 +61,7 @@ public class LabXpertApplication implements CommandLineRunner {
         doctor.setSexe(EnumSexe.FEMAL);
         doctor.setUserName("DoctorUser");
         doctor.setPassword("DoctorPass");
-
+        doctorRepository.save(doctor);
         // Création d'un patient
         Patient patient = new Patient();
         patient.setNom("NomPatient");
@@ -83,10 +83,13 @@ public class LabXpertApplication implements CommandLineRunner {
         echantillon.setTechenicien(technicien);
         echantillon.setDateDeReception(LocalDateTime.now());
         echantillon.setPatient(patient);
+        patientRepository.save(patient);
+        echantillonRepository.save(echantillon);
         patient.setEchantillons(new ArrayList<>());
         patient.getEchantillons().add(echantillon);
         technicien.setEchantillons(new ArrayList<>());
         technicien.getEchantillons().add(echantillon);
+        technicienRepository.save(technicien);
         Analyse analyse = new Analyse();
         analyse.setDateDebut(LocalDateTime.now()); // Utilisez la date et l'heure actuelles ou des valeurs appropriées
         analyse.setCommentaire("Analyse en cours");
@@ -112,7 +115,7 @@ public class LabXpertApplication implements CommandLineRunner {
         resultat.setValue(8.5f);
         test.setTestStandardValue(testStandardValue);
         test.setResult(resultat);//
-        test.setTypeAnalyse(typeAnalyse);// Remplacez par la valeur maximale appropriée
-        analyseRepository.save(analyse);
+        test.setTypeAnalyse(typeAnalyse);// Remplacez par la valeur maximale appropriéeinformation_schema
+ analyseRepository.save(analyse);
     }
 }
