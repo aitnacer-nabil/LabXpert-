@@ -19,7 +19,8 @@ public class TestStandardValue {
 
     @OneToOne(mappedBy = "testStandardValue")
     private Test test;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
 
     @Override
     public String toString() {

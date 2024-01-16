@@ -14,7 +14,8 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private float value;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "Result{" +

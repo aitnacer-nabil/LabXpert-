@@ -23,7 +23,8 @@ public class Echantillon {
     private Utilisateur Utilisateur;
     @OneToMany(mappedBy = "echantillon",fetch = FetchType.EAGER)
     private List<Analyse> analyses;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "Echantillon{" +

@@ -21,7 +21,8 @@ public class Test {
     private Result result;
     @OneToOne
     private TestStandardValue testStandardValue;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "Test{" +

@@ -1,8 +1,9 @@
-package com.aitnacer.LabXpert.service;
+package com.aitnacer.LabXpert.service.impl;
 
 import com.aitnacer.LabXpert.dtos.UtilisateurDto;
 import com.aitnacer.LabXpert.entity.Utilisateur;
 import com.aitnacer.LabXpert.repository.UserRepository;
+import com.aitnacer.LabXpert.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;

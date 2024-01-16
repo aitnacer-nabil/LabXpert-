@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "patients")
 @NoArgsConstructor
-public class Patient extends Utilisateur {
+public class Patient extends UtilisateurInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

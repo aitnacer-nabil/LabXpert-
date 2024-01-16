@@ -28,7 +28,8 @@ public class Analyse {
     private List<TypeAnalyse> typeAnalyses;
     @OneToOne
     private Utilisateur utilisateur;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "Analyse{" +
