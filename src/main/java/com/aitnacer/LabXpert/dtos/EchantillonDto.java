@@ -14,8 +14,11 @@ import java.util.List;
 public class EchantillonDto implements Serializable {
     LocalDateTime dateDeReception;
     String echantillonCode;
+    Long patientId;
     PatientDto patient;
-    UtilisateurDto Utilisateur;
+    Long utilisateurId;
+    UtilisateurDto utilisateurDto;
     List<AnalyseDto> analyses;
+    List<Long> analysesId;
     boolean deleted;
 }
