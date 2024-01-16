@@ -16,15 +16,18 @@ import java.util.Objects;
 @Entity
 @Table(name = "Utilisateur")
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class Utilisateur extends UtilisateurInfo {
 
     private String userName;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-
-
-
-
+    @Builder
+    public Utilisateur(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted, String userName, String password, UserRole role) {
+        super(id, nom, prenom, Adresse, telephone, sexe, deleted);
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
 }

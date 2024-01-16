@@ -1,5 +1,6 @@
 package com.aitnacer.LabXpert.service.impl;
 
+import com.aitnacer.LabXpert.dtos.EchantillonDto;
 import com.aitnacer.LabXpert.entity.Echantillon;
 import com.aitnacer.LabXpert.entity.Patient;
 import com.aitnacer.LabXpert.repository.PatientRepository;
@@ -42,6 +43,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
         echantillon.setPatient(patient);
 
 
+        return echantillonDto;
     }
 
     @Override
