@@ -1,9 +1,10 @@
 package com.aitnacer.LabXpert.dtos;
 
+import com.aitnacer.LabXpert.dtos.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.TypeAnalyseDto;
+import com.aitnacer.LabXpert.dtos.UtilisateurDto;
+import com.aitnacer.LabXpert.entity.Analyse;
 import com.aitnacer.LabXpert.entity.AnalyseStatus;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -11,18 +12,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO for {@link com.aitnacer.LabXpert.entity.Analyse}
+ * DTO for {@link Analyse}
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Value
 public class AnalyseDto implements Serializable {
     Long id;
     LocalDateTime dateDebut;
     String Commentaire;
     String nom;
-    Long echantillonId;
+    EchantillonDto echantillon;
     AnalyseStatus status;
-    List<Long> typeAnalysisIds;
-    Long utilisateurId;
+    List<TypeAnalyseDto> typeAnalyses;
+    UtilisateurDto utilisateur;
+    boolean deleted;
 }

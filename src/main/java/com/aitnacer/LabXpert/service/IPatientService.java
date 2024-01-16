@@ -11,7 +11,7 @@ public interface IPatientService {
     PatientDto createPatient(PatientDto patientDto);
     PatientDto updatePatient(Long id ,PatientDto patientDto);
 
+    void deletePatient (Long id);
 
 
-    void deleteUtilisateur(Long id);
 }
