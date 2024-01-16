@@ -13,6 +13,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link Utilisateur}
  */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
