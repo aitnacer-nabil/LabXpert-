@@ -18,7 +18,8 @@ public class TypeAnalyse {
     private Analyse analyse;
     @OneToMany(mappedBy = "typeAnalyse")
     private List<Test> tests;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "TypeAnalyse{" +
