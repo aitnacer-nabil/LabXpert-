@@ -1,16 +1,12 @@
 package com.aitnacer.LabXpert;
 
 
-import com.aitnacer.LabXpert.entity.*;
 import com.aitnacer.LabXpert.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 @SpringBootApplication
@@ -20,102 +16,76 @@ public class LabXpertApplication implements CommandLineRunner {
         SpringApplication.run(LabXpertApplication.class, args);
     }
 
-    @Autowired
-    AdministrateurRepository administrateurRepository;
-    @Autowired
-    AnalyseRepository analyseRepository;
-    @Autowired
-    DoctorRepository doctorRepository;
-    @Autowired
-    PatientRepository patientRepository;
-    @Autowired
-    TechnicienRepository technicienRepository;
-    @Autowired
-    EchantillonRepository echantillonRepository;
 
 
     @Override
-    @Transactional
+
 
     public void run(String... args) throws Exception {
 
-		Administrateur administrateur = new Administrateur();
-		administrateur.setNom("NomAdmin");
-		administrateur.setPrenom("PrenomAdmin");
-		administrateur.setAdresse("AdresseAdmin");
-		administrateur.setTelephone("0123456789");
-		administrateur.setSexe(EnumSexe.MALE);
-		administrateur.setUserName("AdminUser");
-		administrateur.setPassword("AdminPass");
-		System.out.println(administrateurRepository.save(administrateur));
-		//administrateurRepository.deleteById(1L);
-		administrateur.setPrenom("Updated Prenom");
 
-		System.out.println(administrateurRepository.save(administrateur));
-        // Création d'un docteur
-        Doctor doctor = new Doctor();
-        doctor.setNom("NomDoctor");
-        doctor.setPrenom("PrenomDoctor");
-        doctor.setAdresse("AdresseDoctor");
-        doctor.setTelephone("9876543210");
-        doctor.setSexe(EnumSexe.FEMAL);
-        doctor.setUserName("DoctorUser");
-        doctor.setPassword("DoctorPass");
-        doctorRepository.save(doctor);
-        // Création d'un patient
-        Patient patient = new Patient();
-        patient.setNom("NomPatient");
-        patient.setPrenom("PrenomPatient");
-        patient.setAdresse("AdressePatient");
-        patient.setTelephone("5555555555");
-        patient.setSexe(EnumSexe.MALE);
-        // Création d'un technicien
-        Technicien technicien = new Technicien();
-        technicien.setNom("NomTechnicien");
-        technicien.setPrenom("PrenomTechnicien");
-        technicien.setAdresse("AdresseTechnicien");
-        technicien.setTelephone("1111111111");
-        technicien.setSexe(EnumSexe.FEMAL);
-        technicien.setUserName("TechnicienUser");
-        technicien.setPassword("TechnicienPass");
-        Echantillon echantillon = new Echantillon();
-        echantillon.setEchantillonCode("ECE1212");
-        echantillon.setTechenicien(technicien);
-        echantillon.setDateDeReception(LocalDateTime.now());
-        echantillon.setPatient(patient);
-        patientRepository.save(patient);
-        echantillonRepository.save(echantillon);
-        patient.setEchantillons(new ArrayList<>());
-        patient.getEchantillons().add(echantillon);
-        technicien.setEchantillons(new ArrayList<>());
-        technicien.getEchantillons().add(echantillon);
-        technicienRepository.save(technicien);
-        Analyse analyse = new Analyse();
-        analyse.setDateDebut(LocalDateTime.now()); // Utilisez la date et l'heure actuelles ou des valeurs appropriées
-        analyse.setCommentaire("Analyse en cours");
-        analyse.setStatus(AnalyseStatus.EN_ATTENTE);
-        analyse.setDoctor(doctor);
-        doctor.setAnalyse(analyse);
-        analyse.setNom("Homologie XYZ");
-        TypeAnalyse typeAnalyse = new TypeAnalyse();
-        typeAnalyse.setNom("TypeXYZ");
-        analyse.setTypeAnalyses(new ArrayList<>());
-        analyse.getTypeAnalyses().add(typeAnalyse);
-        typeAnalyse.setAnalyse(analyse);
 
-        Test test = new Test();
-        test.setNom("TestXYZ");
-        test.setTypeAnalyse(typeAnalyse);
+//        Doctor doctor = new Doctor();
+//        doctor.setNom("NomDoctor");
+//        doctor.setPrenom("PrenomDoctor");
+//        doctor.setAdresse("AdresseDoctor");
+//        doctor.setTelephone("9876543210");
+//        doctor.setSexe(EnumSexe.FEMAL);
+//        doctor.setUserName("DoctorUser");
+//        doctor.setPassword("DoctorPass");
+//
+//         Création d'un patient
+//        Patient patient = new Patient();
+//        patient.setNom("NomPatient");
+//        patient.setPrenom("PrenomPatient");
+//        patient.setAdresse("AdressePatient");
+//        patient.setTelephone("5555555555");
+//        patient.setSexe(EnumSexe.MALE);
+//        // Création d'un technicien
+//        Technicien technicien = new Technicien();
+//        technicien.setNom("NomTechnicien");
+//        technicien.setPrenom("PrenomTechnicien");
+//        technicien.setAdresse("AdresseTechnicien");
+//        technicien.setTelephone("1111111111");
+//        technicien.setSexe(EnumSexe.FEMAL);
+//        technicien.setUserName("TechnicienUser");
+//        technicien.setPassword("TechnicienPass");
+//        Echantillon echantillon = new Echantillon();
+//        echantillon.setEchantillonCode("ECE1212");
+//        echantillon.setTechenicien(technicien);
+//        echantillon.setDateDeReception(LocalDateTime.now());
+//        echantillon.setPatient(patient);
+//        patient.setEchantillons(new ArrayList<>());
+//        patient.getEchantillons().add(echantillon);
+//        technicien.setEchantillons(new ArrayList<>());
+//        technicien.getEchantillons().add(echantillon);
+//        Analyse analyse = new Analyse();
+//        analyse.setDateDebut(LocalDateTime.now()); // Utilisez la date et l'heure actuelles ou des valeurs appropriées
+//        analyse.setCommentaire("Analyse en cours");
+//        analyse.setStatus(AnalyseStatus.EN_ATTENTE);
+//        analyse.setDoctor(doctor);
+//        doctor.setAnalyse(analyse);
+//        analyse.setNom("Homologie XYZ");
+//        TypeAnalyse typeAnalyse = new TypeAnalyse();
+//        typeAnalyse.setNom("TypeXYZ");
+//        analyse.setTypeAnalyses(new ArrayList<>());
+//        analyse.getTypeAnalyses().add(typeAnalyse);
+//        typeAnalyse.setAnalyse(analyse);
+//
+//        Test test = new Test();
+//        test.setNom("TestXYZ");
+//        test.setTypeAnalyse(typeAnalyse);
+//
+//        TestStandardValue testStandardValue = new TestStandardValue();
+//        testStandardValue.setUnite("UnitéXYZ"); // Remplacez par l'unité appropriée
+//        testStandardValue.setMinValue(5.0f); // Remplacez par la valeur minimale appropriée
+//        testStandardValue.setMaxValue(10.0f);
+//        Result resultat = new Result();
+//        resultat.setValue(8.5f);
+//        test.setTestStandardValue(testStandardValue);
+//        test.setResult(resultat);//
+//        test.setTypeAnalyse(typeAnalyse);// Remplacez par la valeur maximale appropriée
+//        analyseRepository.save(analyse);
 
-        TestStandardValue testStandardValue = new TestStandardValue();
-        testStandardValue.setUnite("UnitéXYZ"); // Remplacez par l'unité appropriée
-        testStandardValue.setMinValue(5.0f); // Remplacez par la valeur minimale appropriée
-        testStandardValue.setMaxValue(10.0f);
-        Result resultat = new Result();
-        resultat.setValue(8.5f);
-        test.setTestStandardValue(testStandardValue);
-        test.setResult(resultat);//
-        test.setTypeAnalyse(typeAnalyse);// Remplacez par la valeur maximale appropriéeinformation_schema
- analyseRepository.save(analyse);
     }
 }

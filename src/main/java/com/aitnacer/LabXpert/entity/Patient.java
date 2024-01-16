@@ -8,19 +8,18 @@ import java.util.List;
 import java.util.Set;
 
 
-@EqualsAndHashCode(callSuper = true)
+
 @Data
 @ToString(callSuper = true)
 @Entity
 @Table(name = "patients")
-public class Patient extends Utilisateur {
+@NoArgsConstructor
+public class Patient extends UtilisateurInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Patient() {
-        this.setRole(UserRole.PATIENT);
-    }
+
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
