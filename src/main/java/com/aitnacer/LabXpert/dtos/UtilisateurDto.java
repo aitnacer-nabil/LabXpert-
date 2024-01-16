@@ -13,8 +13,9 @@ import java.io.Serializable;
 /**
  * DTO for {@link Utilisateur}
  */
-@AllArgsConstructor
+
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class UtilisateurDto implements Serializable {
     Long id;

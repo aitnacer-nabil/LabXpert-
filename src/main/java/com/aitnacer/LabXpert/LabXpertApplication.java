@@ -46,7 +46,7 @@ public class LabXpertApplication implements CommandLineRunner {
 //        doctor.setUserName("DoctorUser");
 //        doctor.setPassword("DoctorPass");
 //
-//        // Création d'un patient
+//         Création d'un patient
 //        Patient patient = new Patient();
 //        patient.setNom("NomPatient");
 //        patient.setPrenom("PrenomPatient");
