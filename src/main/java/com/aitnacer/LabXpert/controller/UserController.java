@@ -1,6 +1,5 @@
 package com.aitnacer.LabXpert.controller;
 
-import com.aitnacer.LabXpert.dtos.UtilisateurDto;
 import com.aitnacer.LabXpert.service.impl.UserServiceImpl;
 import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;

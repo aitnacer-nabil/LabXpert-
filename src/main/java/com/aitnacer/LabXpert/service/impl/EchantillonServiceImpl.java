@@ -1,7 +1,8 @@
 package com.aitnacer.LabXpert.service.impl;
 
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
 import com.aitnacer.LabXpert.entity.Echantillon;
+import com.aitnacer.LabXpert.entity.Patient;
+import com.aitnacer.LabXpert.repository.PatientRepository;
 import com.aitnacer.LabXpert.repository.EchantillonRepository;
 import com.aitnacer.LabXpert.service.IEchantillonService;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class EchantillonServiceImpl implements IEchantillonService {
     private final EchantillonRepository echantillonRepository;
+    private final PatientRepository patientRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -34,10 +36,12 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonDto createEchantillon(EchantillonDto echantillonDto) {
-        Echantillon echantillon = modelMapper.map(echantillonDto, Echantillon.class);
-        Echantillon savedEchantillon = echantillonRepository.save(echantillon);
+        //TODO handle null exption
+        Patient patient = patientRepository.findById(echantillonDto.getPatientId()).orElse(null);
+        Echantillon echantillon = new Echantillon();
+        echantillon.setPatient(patient);
 
-        return modelMapper.map(echantillon, EchantillonDto.class);
+
     }
 
     @Override

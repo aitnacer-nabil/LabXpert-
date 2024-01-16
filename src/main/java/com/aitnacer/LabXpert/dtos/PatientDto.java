@@ -1,17 +1,16 @@
 package com.aitnacer.LabXpert.dtos;
 
 import com.aitnacer.LabXpert.entity.EnumSexe;
-import com.aitnacer.LabXpert.entity.UserRole;
-import com.aitnacer.LabXpert.entity.Utilisateur;
+import com.aitnacer.LabXpert.entity.Patient;
 import lombok.Value;
 
 import java.io.Serializable;
 
 /**
- * DTO for {@link Utilisateur}
+ * DTO for {@link Patient}
  */
 @Value
-public class UtilisateurDto implements Serializable {
+public class PatientDto implements Serializable {
     Long id;
     String nom;
     String prenom;
@@ -19,7 +18,4 @@ public class UtilisateurDto implements Serializable {
     String telephone;
     EnumSexe sexe;
     boolean deleted;
-    String userName;
-    String password;
-    UserRole role;
 }
