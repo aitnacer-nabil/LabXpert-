@@ -16,11 +16,11 @@ import java.util.List;
 public class UserController {
     final UserServiceImpl userServiceImpl;
     @GetMapping
-    public ResponseEntity<List<UtilisateurDto>> getAllAdmin(){
+    public ResponseEntity<List<UtilisateurDto>> getAllUser(){
         return ResponseEntity.ok(userServiceImpl.getAllUtilisateur());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<UtilisateurDto> getAdminById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<UtilisateurDto> getUSerById(@PathVariable(name = "id") Long id) {
         UtilisateurDto utilisateurDto = userServiceImpl.getUtilisateurById(id);
         return ResponseEntity.ok(utilisateurDto);
     }

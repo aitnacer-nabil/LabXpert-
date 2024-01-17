@@ -28,10 +28,11 @@ public class UserServiceImpl implements IUserService {
         Utilisateur administrateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
         return modelMapper.map(administrateur, UtilisateurDto.class);
     }
-    public UtilisateurDto createUtilisateur(UtilisateurDto administrateurDto){
+    public UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto){
         // TODO verification for administrateur
-        Utilisateur administrateur = modelMapper.map(administrateurDto, Utilisateur.class);
-        Utilisateur administrateurSaved  = userRepository.save(administrateur);
+        Utilisateur utilisateur = modelMapper.map(utilisateurDto, Utilisateur.class);
+        System.out.println(utilisateur);
+        Utilisateur administrateurSaved  = userRepository.save(utilisateur);
         return  modelMapper.map(administrateurSaved, UtilisateurDto.class);
 
     }

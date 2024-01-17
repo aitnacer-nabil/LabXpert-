@@ -3,10 +3,7 @@ package com.aitnacer.LabXpert.dtos;
 import com.aitnacer.LabXpert.entity.EnumSexe;
 import com.aitnacer.LabXpert.entity.UserRole;
 import com.aitnacer.LabXpert.entity.Utilisateur;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -17,6 +14,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UtilisateurDto implements Serializable {
     Long id;
     String nom;
