@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@ToString
 public abstract class UtilisateurInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

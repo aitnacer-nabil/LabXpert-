@@ -17,8 +17,8 @@ public class Test {
     @ManyToOne
     private TypeAnalyse typeAnalyse;
 
-    @OneToOne
-    private Result result;
+
+    private float result;
     @OneToOne
     private TestStandardValue testStandardValue;
     @Column(name = "is_deleted", nullable = false)

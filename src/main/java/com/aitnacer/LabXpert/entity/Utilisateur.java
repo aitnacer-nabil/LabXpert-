@@ -16,7 +16,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "Utilisateur")
 @NoArgsConstructor
-
 public class Utilisateur extends UtilisateurInfo {
 
     private String userName;
