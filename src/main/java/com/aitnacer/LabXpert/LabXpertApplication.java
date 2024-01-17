@@ -99,4 +99,6 @@ public class LabXpertApplication implements CommandLineRunner {
 //        test.setTypeAnalyse(typeAnalyse);// Remplacez par la valeur maximale appropriée
 //        analyseRepository.save(analyse);
     }
+
+
 }

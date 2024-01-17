@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class Utilisateur extends UtilisateurInfo {
     @NotNull(message = "The username should not be null!")
     private String userName;
     @NotNull(message = "The password should not be null!")
+    @NotBlank(message = "The password should not be blank!")
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;

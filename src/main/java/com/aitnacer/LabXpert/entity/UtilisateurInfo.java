@@ -21,7 +21,7 @@ public abstract class UtilisateurInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "The name should not be null!")
-    @Size(min = 5)
+    @Size(min = 4)
     @NotEmpty
     private String nom;
     @NotNull(message = "The prenom should not be null!")
@@ -38,7 +38,6 @@ public abstract class UtilisateurInfo {
     private String telephone;
     @Enumerated(EnumType.STRING)
     @NotNull
-    @NotEmpty
     private EnumSexe sexe;
 
     @Column(name = "is_deleted", nullable = false)
