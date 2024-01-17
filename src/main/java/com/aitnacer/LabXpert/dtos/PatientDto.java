@@ -19,7 +19,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class PatientDto implements Serializable {
     Long id;
     String nom;

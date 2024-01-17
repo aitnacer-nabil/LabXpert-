@@ -1,7 +1,9 @@
 package com.aitnacer.LabXpert.dtos;
 
-import com.aitnacer.LabXpert.dtos.TestDto;
 import com.aitnacer.LabXpert.entity.TestStandardValue;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -9,7 +11,9 @@ import java.io.Serializable;
 /**
  * DTO for {@link TestStandardValue}
  */
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TestStandardValueDto implements Serializable {
     Long id;
     String unite;

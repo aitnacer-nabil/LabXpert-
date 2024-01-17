@@ -28,7 +28,7 @@ public class PatientController {
     @PostMapping
     public ResponseEntity<PatientDto> createUser( @RequestBody PatientDto patientDto) {
        PatientDto patientDto1 = patientServiveImp.createPatient(patientDto);
-        return new ResponseEntity<>(patientDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(patientDto1, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
     public ResponseEntity<PatientDto> updatePatient(@PathVariable("id") Long id,  @RequestBody PatientDto patientDto)  {

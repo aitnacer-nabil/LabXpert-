@@ -37,7 +37,10 @@ public class PatientServiveImp implements IPatientService {
         // TODO verification for patient
         Patient patient = modelMapper.map(patientDto, Patient.class);
         Patient patientSave = patientRepository.save(patient);
-        return modelMapper.map(patientSave, PatientDto.class);
+        System.out.println(patientSave);
+        PatientDto patientDto1 = modelMapper.map(patientSave, PatientDto.class);
+        System.out.println(patientDto1);
+        return patientDto1;
     }
 
     @Override

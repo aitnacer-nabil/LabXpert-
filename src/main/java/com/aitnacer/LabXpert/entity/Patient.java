@@ -9,25 +9,16 @@ import java.util.Set;
 
 
 
-@Data
+@Getter
+@Setter
 @ToString(callSuper = true)
 @Entity
 @Table(name = "patients")
 @NoArgsConstructor
 public class Patient extends UtilisateurInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id + super.toString() +
-                '}';
-    }
+
 }

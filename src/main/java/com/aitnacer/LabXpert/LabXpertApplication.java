@@ -88,4 +88,6 @@ public class LabXpertApplication implements CommandLineRunner {
 //        analyseRepository.save(analyse);
 
     }
+
+
 }
