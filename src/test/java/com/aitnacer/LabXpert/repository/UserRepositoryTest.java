@@ -29,12 +29,12 @@ class UserRepositoryTest {
         //given or precondition
         Utilisateur utilisateur = Utilisateur.builder()
                 .nom("nabil")
-                .prenom("ait")
+                .prenom("ait nacer")
                 .sexe(EnumSexe.MALE)
                 .role(UserRole.RESPONSABLE)
                 .Adresse("hello")
                 .userName("nabil")
-                .telephone("213213")
+                .telephone("0612341256")
                 .password("12345")
                 .build();
         //when action or behaviour
@@ -52,32 +52,32 @@ class UserRepositoryTest {
     public void getAllUtilisateur(){
         Utilisateur utilisateur1 = Utilisateur.builder()
                 .nom("nabil")
-                .prenom("ait")
+                .prenom("ait nacer")
                 .sexe(EnumSexe.MALE)
                 .role(UserRole.RESPONSABLE)
                 .Adresse("hello")
                 .userName("nabil")
-                .telephone("213213")
+                .telephone("0612341256")
                 .password("12345")
                 .build();
         Utilisateur utilisateur2 = Utilisateur.builder()
                 .nom("nabil 1" )
-                .prenom("ait 1")
+                .prenom("ait nacer 1")
                 .sexe(EnumSexe.MALE)
                 .role(UserRole.RESPONSABLE)
                 .Adresse("hello")
                 .userName("nabil")
-                .telephone("213213")
+                .telephone("0612341256")
                 .password("12345")
                 .build();
         Utilisateur utilisateur3 = Utilisateur.builder()
                 .nom("nabil 2")
-                .prenom("ait 2")
+                .prenom("ait nacer 2")
                 .sexe(EnumSexe.MALE)
                 .role(UserRole.RESPONSABLE)
                 .Adresse("hello")
                 .userName("nabil")
-                .telephone("213213")
+                .telephone("0612341256")
                 .password("12345")
                 .build();
         Stream.of(utilisateur2,utilisateur3,utilisateur1).forEach(user ->{

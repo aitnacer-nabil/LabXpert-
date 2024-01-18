@@ -44,12 +44,12 @@ class UserControllerTest {
     void getAllUser() throws Exception {
         Utilisateur utilisateur1 = Utilisateur.builder()
                 .nom("nabil")
-                .prenom("ait")
+                .prenom("ait nacer")
                 .sexe(EnumSexe.MALE)
                 .role(UserRole.RESPONSABLE)
                 .Adresse("hello")
                 .userName("nabil")
-                .telephone("213213")
+                .telephone("0612341256")
                 .password("12345")
                 .build();
         given(userService.createUtilisateur(ArgumentMatchers.any(UtilisateurDto.class)))
@@ -71,21 +71,5 @@ class UserControllerTest {
 
     }
 
-    @Test
-    void getUSerById() {
-    }
 
-    @Test
-    void createUser() {
-
-    }
-
-    @Test
-    void updateUser() {
-
-    }
-
-    @Test
-    void deleteUserById() {
-    }
 }

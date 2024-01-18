@@ -17,6 +17,8 @@ import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -59,7 +61,7 @@ class PatientServiveImpTest {
                 .sexe(EnumSexe.valueOf("MALE"))
                 .build();
         //given
-        given(patientRepository.findByDeletedFalse()).willReturn(List.of(patient));
+        given(patientRepository.findByDeletedFalse()).willReturn(Stream.of(patient).collect(Collectors.toList()));
         List<PatientDto> patients=patientService.getAllPatient();
         //then
         Assertions.assertThat(patients).isEmpty();
