@@ -1,5 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Table(name = "test")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +21,8 @@ public class Test {
     @ManyToOne
     private TypeAnalyse typeAnalyse;
 
-
-    private float result;
+    @OneToOne
+    private Result result;
     @OneToOne
     private TestStandardValue testStandardValue;
     @Column(name = "is_deleted", nullable = false)
