@@ -1,6 +1,9 @@
 package com.aitnacer.LabXpert.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,6 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "typeAnalyse")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TypeAnalyse {
 
     @Id
