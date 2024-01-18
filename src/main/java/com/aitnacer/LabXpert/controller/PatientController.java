@@ -1,10 +1,10 @@
 package com.aitnacer.LabXpert.controller;
 
 import com.aitnacer.LabXpert.dtos.PatientDto;
-import com.aitnacer.LabXpert.dtos.UtilisateurDto;
 import com.aitnacer.LabXpert.service.impl.PatientServiveImp;
 import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"patient")
 @AllArgsConstructor
+
 public class PatientController {
     final PatientServiveImp patientServiveImp;
     @GetMapping

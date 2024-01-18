@@ -1,7 +1,6 @@
 package com.aitnacer.LabXpert.service;
 
 import com.aitnacer.LabXpert.dtos.PatientDto;
-import com.aitnacer.LabXpert.dtos.UtilisateurDto;
 
 import java.util.List;
 
