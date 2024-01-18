@@ -24,6 +24,7 @@ public class Test {
     @OneToOne
     private Result result;
     @OneToOne
+    @JoinColumn
     private TestStandardValue testStandardValue;
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;

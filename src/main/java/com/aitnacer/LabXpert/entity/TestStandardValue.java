@@ -18,8 +18,8 @@ public class TestStandardValue {
     private Long id;
 
     private String unite;
-    private float minValue;
-    private float maxValue;
+    private double minValue;
+    private double maxValue;
 
     @OneToOne(mappedBy = "testStandardValue")
     private Test test;
