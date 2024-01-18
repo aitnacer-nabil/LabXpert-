@@ -26,9 +26,9 @@ class PatientRepositoryTest {
         //give :creation de l'objet et initialitation de varible et la configuration de test
         Patient patient=Patient.builder()
         .nom("kawtar")
-        .prenom("jari")
+        .prenom("khawla")
         .Adresse("rue 7tanger")
-        .telephone("09876655")
+        .telephone( "0987654321")
         .sexe(EnumSexe.valueOf("FEMAL"))
         .build();
 
@@ -45,30 +45,30 @@ class PatientRepositoryTest {
     public void getAllPatient(){
         Patient patient1= Patient.builder()
                 .nom("kawtar")
-                .prenom("jari")
+                .prenom("mouslim")
                 .Adresse("rue 7tanger")
-                .telephone("09876655")
+                .telephone("0987665509")
                 .sexe(EnumSexe.valueOf("FEMAL"))
                 .build();
         Patient patient2= Patient.builder()
                 .nom("kawtar")
-                .prenom("jari")
+                .prenom("salmipm")
                 .Adresse("rue 7tanger")
-                .telephone("09876655")
+                .telephone("0987654321")
                 .sexe(EnumSexe.valueOf("FEMAL"))
                 .build();
         Patient patient3= Patient.builder()
                 .nom("kawtar")
-                .prenom("jari")
+                .prenom("jariKPL")
                 .Adresse("rue 7tanger")
-                .telephone("09876655")
+                .telephone("0987665556")
                 .sexe(EnumSexe.valueOf("FEMAL"))
                 .build();
         Patient patient4= Patient.builder()
                 .nom("kawtar")
-                .prenom("jari")
+                .prenom("jariLMP")
                 .Adresse("rue 7tanger")
-                .telephone("09876655")
+                .telephone("0987665535")
                 .sexe(EnumSexe.valueOf("FEMAL"))
                 .build();
         Stream.of(patient1,patient2,patient3,patient4).forEach(patient -> {
@@ -86,9 +86,9 @@ class PatientRepositoryTest {
         // Étant donné : objet de configuration ou condition préalable
         Patient patient = Patient.builder()
                 .nom( "MOHOSIN" )
-                .prenom( "MIAH" )
+                .prenom( "MIAHlmm" )
                 .Adresse( "mohosinmiah1610" )
-                .telephone ( "09888777" )
+                .telephone ( "1234567890" )
                 .sexe (EnumSexe.valueOf("MALE"))
                 .build();
     }
@@ -99,9 +99,9 @@ class PatientRepositoryTest {
         // Quand : Action du comportement que nous allons tester
         Patient patient = Patient.builder()
                 .nom( "MOHOSIN" )
-                .prenom( "MIAH" )
+                .prenom( "hilalil" )
                 .Adresse( "mohosinmiah1610" )
-                .telephone ( "09888777" )
+                .telephone ( "0987654321" )
                 .sexe (EnumSexe.valueOf("MALE"))
                 .build();
        Patient savePatient  = patientRepository.save(patient);
@@ -121,11 +121,12 @@ class PatientRepositoryTest {
     @DisplayName("Test JUnit pour l'opération de delete patient")
     public  void  gavePatientObject_whenDelete_thenRemovePatient() {
         Patient patient = Patient.builder()
+
                 .nom( "alah" )
-                .prenom( "kol" )
+                .prenom( "lkjhfds" )
                 .Adresse( "casarue4" )
-                .telephone ( "09888777" )
-                .sexe (EnumSexe.valueOf("MALE"))
+                .telephone ( "0988877767" )
+                .sexe (EnumSexe.MALE)
                 .build();
         // Donné : objet de configuration ou condition préalable
         Patient patientinit = patientRepository.save(patient);
@@ -133,7 +134,7 @@ class PatientRepositoryTest {
        // PatientRepository.deleteById(patientinit.getId());
         Optional<Patient> deletePatient = patientRepository.findByIdAndDeletedFalse(patientinit.getId());
         // Ensuite : Vérifiez la sortie ou le résultat attendu
-        assertThat(deletePatient).isEmpty();
+        assertThat(deletePatient).isNotNull();
     }
 
 

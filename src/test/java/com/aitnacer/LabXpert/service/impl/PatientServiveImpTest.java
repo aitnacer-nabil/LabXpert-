@@ -20,6 +20,8 @@ import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,6 +51,7 @@ class PatientServiveImpTest {
     @Test
     void getAllPatient() {
         Patient  patient=Patient.builder()
+                .id(1L)
                 .nom("salma")
                 .prenom("SAI")
                 .Adresse("quartie casa ")
@@ -63,16 +66,17 @@ class PatientServiveImpTest {
                 .sexe(EnumSexe.valueOf("MALE"))
                 .build();
         //given
-        given(patientRepository.findByDeletedFalse()).willReturn(List.of(patient));
+        given(patientRepository.findByDeletedFalse()).willReturn(Stream.of(patient).collect(Collectors.toList()));
         List<PatientDto> patients=patientService.getAllPatient();
         //then
-        Assertions.assertThat(patients).isEmpty();
+        Assertions.assertThat(patients).isNotNull();
         Assertions.assertThat(patients.size()).isEqualTo(1);
     }
 
     @Test
     void getPatientById() {
         Patient  patient=Patient.builder()
+                .id(1L)
                 .nom("salma")
                 .prenom("SAI")
                 .Adresse("quartie casa ")
