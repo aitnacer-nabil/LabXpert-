@@ -15,7 +15,6 @@ import java.util.Set;
 @Entity
 @Table(name = "patients")
 @NoArgsConstructor
-
 public class Patient extends UtilisateurInfo {
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
