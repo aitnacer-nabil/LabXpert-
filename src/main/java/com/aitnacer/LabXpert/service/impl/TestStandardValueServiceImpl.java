@@ -9,18 +9,15 @@ import com.aitnacer.LabXpert.repository.TestStandardValueRepository;
 import com.aitnacer.LabXpert.service.ITestStandardValuer;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class TestStandardValueImpl implements ITestStandardValuer {
+public class TestStandardValueServiceImpl implements ITestStandardValuer {
     private TestStandardValueRepository testStandardValueRepository;
     private TestRepository testRepository;
     private ModelMapper modelMapper;
@@ -63,13 +60,13 @@ public class TestStandardValueImpl implements ITestStandardValuer {
             throw new ValidationException("max value should not be below 0");
         }
 
-        test = testRepository.findByIdAndDeletedFalse(testStandardValueDto.getTestId()).orElseThrow(new ApiException("Not test found for this id : ", HttpStatus.BAD_REQUEST));
+      //  test = testRepository.findByIdAndDeletedFalse(testStandardValueDto.getTestId()).orElseThrow(new ApiException("Not test found for this id : ", HttpStatus.BAD_REQUEST));
         TestStandardValue testStandardValue = testStandardValueRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException("no TestStandardValue fond for this id : "+id,HttpStatus.BAD_REQUEST));
-        testStandardValue.setTest(test);
+       // testStandardValue.setTest(test);
         testStandardValue.setMaxValue(testStandardValueDto.getMaxValue());
         testStandardValue.setMinValue(testStandardValueDto.getMinValue());
         TestStandardValue testStandardValueSaved = testStandardValueRepository.save(testStandardValue);
-        test.setTestStandardValue(testStandardValueSaved);
+      //  test.setTestStandardValue(testStandardValueSaved);
         return modelMapper.map(testStandardValueSaved, TestStandardValueDto.class);
     }
 
