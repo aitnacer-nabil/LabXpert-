@@ -15,10 +15,25 @@ import java.util.Set;
 @Entity
 @Table(name = "patients")
 @NoArgsConstructor
+
 public class Patient extends UtilisateurInfo {
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> 4907c70c1ce59dbea9baa60065188d5be111cf80
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
+@Builder
+    public Patient(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted) {
+        super(id, nom, prenom, Adresse, telephone, sexe, deleted);
 
+<<<<<<< HEAD
+    }
+=======
 
+>>>>>>> 4907c70c1ce59dbea9baa60065188d5be111cf80
 }
+
