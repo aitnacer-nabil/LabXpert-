@@ -1,25 +1,18 @@
 package com.aitnacer.LabXpert.dtos;
 
 import com.aitnacer.LabXpert.entity.EnumSexe;
-import com.aitnacer.LabXpert.entity.Patient;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * DTO for {@link Patient}
+ * DTO for {@link com.aitnacer.LabXpert.entity.Patient}
  */
-
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-
+@NoArgsConstructor
+@Builder
 public class PatientDto implements Serializable {
     Long id;
     String nom;
@@ -28,4 +21,5 @@ public class PatientDto implements Serializable {
     String telephone;
     EnumSexe sexe;
     boolean deleted;
+    List<EchantillonDto> echantillons;
 }

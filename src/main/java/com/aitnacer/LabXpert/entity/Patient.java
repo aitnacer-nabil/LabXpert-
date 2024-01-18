@@ -14,20 +14,18 @@ import java.util.Set;
 @Entity
 @Table(name = "patients")
 @NoArgsConstructor
+
 public class Patient extends UtilisateurInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
 
 
 
     @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
     private List<Echantillon> echantillons;
+@Builder
+    public Patient(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted) {
+        super(id, nom, prenom, Adresse, telephone, sexe, deleted);
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id + super.toString() +
-                '}';
     }
 }
+
