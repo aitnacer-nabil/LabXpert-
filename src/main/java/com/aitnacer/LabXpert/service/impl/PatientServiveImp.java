@@ -38,7 +38,11 @@ public class PatientServiveImp implements IPatientService {
         Patient patient = modelMapper.map(patientDto, Patient.class);
         Patient patientSave = patientRepository.save(patient);
         System.out.println(patientSave);
-        return modelMapper.map(patientSave, PatientDto.class);
+
+        PatientDto patientDto1 = modelMapper.map(patientSave, PatientDto.class);
+        System.out.println(patientDto1);
+        return patientDto1;
+
     }
 
     @Override
