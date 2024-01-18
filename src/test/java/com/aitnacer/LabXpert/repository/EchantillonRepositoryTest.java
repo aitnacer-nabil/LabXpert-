@@ -57,8 +57,8 @@ class EchantillonRepositoryTest {
         Echantillon echantillon = Echantillon.builder()
                 .dateDeReception(LocalDateTime.now())
                 .echantillonCode("ABC123")
-                .patient(patient)
-                .utilisateur(utilisateur)
+                .patient(patientsaved)
+                .utilisateur(utilisateurSaved)
                 .build();
         Echantillon echantillon2 =Echantillon.builder()
                 .dateDeReception(LocalDateTime.now().minusDays(2))
@@ -73,6 +73,10 @@ class EchantillonRepositoryTest {
         System.out.println(echantillonSaved.getUtilisateur()+" " +echantillonSaved.getUtilisateur().getEchantillons());
         System.out.println(echantillonSaved.getPatient());
         System.out.println("-------------------------------------------------");
+        System.out.println(userRepository.findByIdAndDeletedFalse(utilisateurSaved.getId())+" " +utilisateur.getEchantillons());
+        System.out.println(patientRepository.findByIdAndDeletedFalse(patientsaved.getId()));
+        System.out.println("-------------------------------------------------");
+
         assertThat(echantillonSaved2).isNotNull();
         System.out.println(echantillonSaved2);
         System.out.println(echantillonSaved2.getUtilisateur()+" " +echantillonSaved2.getUtilisateur().getEchantillons());
