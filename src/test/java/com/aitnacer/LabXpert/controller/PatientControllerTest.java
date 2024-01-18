@@ -7,6 +7,7 @@ import com.aitnacer.LabXpert.service.IPatientService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.BDDMockito;
@@ -17,13 +18,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.awt.*;
 
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebMvcTest
 
 class PatientControllerTest {
@@ -42,16 +46,19 @@ class PatientControllerTest {
     }
 
     @Test
-    void createUser() throws Exception {
+    void createPatient() throws Exception {
         //given
+
         PatientDto patientDto=PatientDto.builder()
+
                 .nom("salma")
-                .prenom("SAI")
+                .prenom("khawla")
                 .Adresse("quartie casa ")
-                .telephone("9885456")
+                .telephone("0987654321")
                 .sexe(EnumSexe.valueOf("MALE"))
                 .build();
-        BDDMockito.given(patientService.createPatient(ArgumentMatchers.any(PatientDto.class)))
+
+      given(patientService.createPatient(ArgumentMatchers.any()))
                 .willAnswer((invocation)-> invocation.getArgument(0));
 
         //when
@@ -62,12 +69,12 @@ class PatientControllerTest {
 
 
         //then verify
-        responce.andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name", CoreMatchers.is(patientDto.getNom())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.prenom",CoreMatchers.is(patientDto.getPrenom())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.Adresse",CoreMatchers.is(patientDto.getAdresse())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.telephone",CoreMatchers.is(patientDto.getTelephone())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.sexe",CoreMatchers.is(patientDto.getSexe())));
+        responce.andExpect(status().isCreated())
+                .andExpect(jsonPath("$.name", CoreMatchers.is(patientDto.getNom())))
+                .andExpect(jsonPath("$.prenom",CoreMatchers.is(patientDto.getPrenom())))
+                .andExpect(jsonPath("$.Adresse",CoreMatchers.is(patientDto.getAdresse())))
+                .andExpect(jsonPath("$.telephone",CoreMatchers.is(patientDto.getTelephone())))
+                .andExpect(jsonPath("$.sexe",CoreMatchers.is(patientDto.getSexe())));
     }
 
     @Test
