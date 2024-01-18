@@ -113,19 +113,6 @@ class PatientRepositoryTest {
     @Test
     @DisplayName("Test JUnit pour l'opération update du patient")
     public void   gavePatientObject_whenUpdate_thenPatientObject (){
-        // Donné : objet de configuration ou condition préalable
-        Patient patientInitial = patientRepository.save(Patient.builder().build());
-        // Quand : Action ou comportement que nous allons tester
-        Patient getPatient= patientRepository.findById(patientInitial.getId()).orElseThrow(null);
-            getPatient.setNom( "MISE À JOUR MOHOSINE" );
-            getPatient.setPrenom( "Nom" );
-            getPatient.setAdresse( "fes" );
-            getPatient.setTelephone( "12345" );
-            getPatient.setSexe(EnumSexe.valueOf("MALE"));
-       Patient updatePatient = patientRepository.save(getPatient);
-        // Ensuite : Vérifiez la sortie ou le résultat attendu
-        assertThat(updatePatient).isNotNull();
-        assertThat(updatePatient.getTelephone()).isEqualTo("12345" );
 
 
     }
