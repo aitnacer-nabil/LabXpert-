@@ -8,27 +8,23 @@ import java.util.List;
 import java.util.Set;
 
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+
+@Getter
+@Setter
 @ToString(callSuper = true)
 @Entity
 @Table(name = "patients")
-public class Patient extends Utilisateur {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@NoArgsConstructor
+public class Patient extends UtilisateurInfo {
 
-    public Patient() {
-        this.setRole(UserRole.PATIENT);
-    }
-
-    @OneToMany(mappedBy = "patient",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient",fetch = FetchType.EAGER)
     private List<Echantillon> echantillons;
+@Builder
+    public Patient(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted) {
+        super(id, nom, prenom, Adresse, telephone, sexe, deleted);
 
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id + super.toString() +
-                '}';
+
     }
+
 }
+

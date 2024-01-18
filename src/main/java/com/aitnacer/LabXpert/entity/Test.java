@@ -1,12 +1,14 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "test")
 @Data
+@NoArgsConstructor
 public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +17,12 @@ public class Test {
     @ManyToOne
     private TypeAnalyse typeAnalyse;
 
-    @OneToOne
-    private Result result;
+
+    private float result;
     @OneToOne
     private TestStandardValue testStandardValue;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
     @Override
     public String toString() {
         return "Test{" +

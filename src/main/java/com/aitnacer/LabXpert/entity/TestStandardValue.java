@@ -1,11 +1,13 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class TestStandardValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +19,8 @@ public class TestStandardValue {
 
     @OneToOne(mappedBy = "testStandardValue")
     private Test test;
-
+    @Column(name = "is_deleted", nullable = false)
+    private boolean deleted;
 
     @Override
     public String toString() {
