@@ -18,12 +18,7 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    @ManyToOne
-    private TypeAnalyse typeAnalyse;
-
-    @OneToOne
-    private Result result;
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn
     private TestStandardValue testStandardValue;
     @Column(name = "is_deleted", nullable = false)

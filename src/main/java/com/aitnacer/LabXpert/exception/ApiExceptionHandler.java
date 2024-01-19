@@ -32,4 +32,5 @@ public class ApiExceptionHandler {
         errors.put("validationErrors", validationErrors);
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 }

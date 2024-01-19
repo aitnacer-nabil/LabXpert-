@@ -1,9 +1,8 @@
 package com.aitnacer.LabXpert.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import com.aitnacer.LabXpert.entity.Result;
+import com.aitnacer.LabXpert.entity.TestStandardValue;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,11 +12,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TestDto implements Serializable {
     Long id;
     String nom;
-    TypeAnalyseDto typeAnalyse;
-    float result;
-    TestStandardValueDto testStandardValue;
+    Long typeAnalyseId;
+    double resultResult;
+    Long testStandardValueId;
     boolean deleted;
+    Result result;
+//TestStandardValue testStandardValue;
 }

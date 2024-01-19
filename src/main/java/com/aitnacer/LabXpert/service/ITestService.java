@@ -16,7 +16,7 @@ public interface ITestService {
     List<TestDto> getAllTests();
 
     TestDto saveTest(TestDto testDto);
-    TestDto updateTest(long id ,TestDto testDto);
+    TestDto updateTest(long id , TestDto testDto);
 
     void deleteTest(Long testId);
 

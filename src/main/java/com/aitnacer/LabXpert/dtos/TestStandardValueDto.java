@@ -18,6 +18,7 @@ public class TestStandardValueDto implements Serializable {
     String unite;
     float minValue;
     float maxValue;
+    @JsonIgnore
     long testId;
     boolean deleted;
 }

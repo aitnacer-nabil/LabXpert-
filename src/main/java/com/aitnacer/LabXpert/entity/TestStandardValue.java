@@ -1,5 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,7 @@ public class TestStandardValue {
     private String unite;
     private double minValue;
     private double maxValue;
+
 
     @OneToOne(mappedBy = "testStandardValue")
     private Test test;
