@@ -16,6 +16,16 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<spring.config.name>application-dev</spring.config.name>
+				<spring.config.location>classpath:/</spring.config.location>
+			</properties>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
