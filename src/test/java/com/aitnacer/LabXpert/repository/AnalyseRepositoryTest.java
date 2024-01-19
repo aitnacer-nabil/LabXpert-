@@ -12,15 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-class EchantillonRepositoryTest {
-    @Autowired
-    EchantillonRepository echantillonRepository;
-    @Autowired
-    PatientRepository patientRepository;
-    @Autowired
-    UserRepository userRepository;
+class AnalyseRepositoryTest {
     @Autowired
     AnalyseRepository analyseRepository;
     @Autowired
@@ -33,56 +28,8 @@ class EchantillonRepositoryTest {
     ResultRepository resultRepository;
 
     @Test
-    void getAllEchantillons() {
-
-    }
-
-    @Test
-    void getEchantillonsById() {
-    }
-
-    @Test
-    @DisplayName("givenEchantile then save and return Echantillon DTO")
-    void createEchantillon() {
-        Utilisateur utilisateur = Utilisateur.builder()
-                .nom("nabil")
-                .prenom("ait nacer")
-                .sexe(EnumSexe.MALE)
-                .role(UserRole.TECHNICIEN)
-                .Adresse("hello")
-                .userName("nabil")
-                .telephone("0612341256")
-                .password("12345")
-                .build();
-        //when action or behaviour
-
-        Utilisateur utilisateurSaved = userRepository.save(utilisateur);
-        //give :creation de l'objet et initialitation de varible et la configuration de test
-        Patient patient=Patient.builder()
-                .nom("kawtar")
-                .prenom("khawla")
-                .Adresse("rue 7tanger")
-                .telephone( "0987654321")
-                .sexe(EnumSexe.valueOf("FEMAL"))
-                .build();
-
-        //insert une patient dans un base de donnne
-        Patient patientsaved = patientRepository.save(patient);
-        Echantillon echantillon = Echantillon.builder()
-                .dateDeReception(LocalDateTime.now())
-                .echantillonCode("ABC123")
-                .patient(patientsaved)
-                .utilisateur(utilisateurSaved)
-                .build();
-        Echantillon echantillon2 =Echantillon.builder()
-                .dateDeReception(LocalDateTime.now().minusDays(2))
-                .echantillonCode("PQR789")
-                .utilisateur(utilisateur)
-                .patient(patient)
-                .build();
-        Echantillon echantillonSaved = echantillonRepository.save(echantillon);
-        Echantillon echantillonSaved2 = echantillonRepository.save(echantillon2);
-        assertThat(echantillonSaved).isNotNull();
+    @DisplayName("given Analyse object then save reutn savedObject")
+    public void save() {
         TestStandardValue testStandardValue = TestStandardValue.builder()
                 .maxValue(4)
                 .minValue(1)
@@ -148,11 +95,7 @@ class EchantillonRepositoryTest {
                 .build();
         Analyse analyseSaved = analyseRepository.save(analyse);
         typeAnalyseSaved.setAnalyse(analyseSaved);
-        List<Analyse> analyses = new ArrayList<>();
-        analyses.add(analyseSaved);
-        echantillonSaved.setAnalyses(analyses);
-        analyseSaved.setEchantillon(echantillonSaved);
-        analyseSaved.setUtilisateur(utilisateurSaved);
+
 
         System.out.println("-----------------------testStandardValueSaved----------------------");
         Optional<TestStandardValue> testStandardValue1 = testStandardValueRepository.findById(testStandardValueSaved.getId());
@@ -187,43 +130,7 @@ class EchantillonRepositoryTest {
         Analyse analyse1 = analyseRepository.findById(analyseSaved.getId()).get();
         System.out.println(analyse1);
         System.out.println(analyse1.getTypeAnalyses());
-        System.out.println("---------------------------echantillonSaved----------------------------------");
+        System.out.println("-------------------------------------------------------------------");
 
-        System.out.println(echantillonSaved);
-        System.out.println(echantillonSaved.getUtilisateur()+" " +echantillonSaved.getUtilisateur().getEchantillons());
-        System.out.println(echantillonSaved.getPatient());
-        System.out.println(echantillonSaved.getAnalyses());
-        System.out.println("-----------------------utilisateurSaved---------------------------------------------");
-        System.out.println(userRepository.findByIdAndDeletedFalse(utilisateurSaved.getId())+" " +utilisateur.getEchantillons());
-        System.out.println("-----------------------patientsaved---------------------------------------------");
-       // System.out.println(patientRepository.findByIdAndDeletedFalse(patientsaved.getId()));
-        System.out.println("-------------------------------------------------");
-
-        assertThat(echantillonSaved2).isNotNull();
-        System.out.println("-----------------------echantillonSaved2--------------------------");
-        System.out.println(echantillonSaved2);
-        System.out.println(echantillonSaved2.getUtilisateur()+" " +echantillonSaved2.getUtilisateur().getEchantillons());
-
-        System.out.println(echantillonSaved2.getPatient());
-
-
-
-
-
-    }
-
-    @Test
-    void updateEChantillon() {
-    }
-
-    @Test
-    void deleteEchantillon() {
-    }
-    @Test
-    void findByDeletedFalse() {
-    }
-
-    @Test
-    void findByIdAndDeletedFalse() {
     }
 }

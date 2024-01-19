@@ -1,10 +1,8 @@
 package com.aitnacer.LabXpert.dtos;
 
 import com.aitnacer.LabXpert.entity.TestStandardValue;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -14,11 +12,12 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TestStandardValueDto implements Serializable {
     Long id;
     String unite;
     float minValue;
     float maxValue;
-    TestDto test;
+    long testId;
     boolean deleted;
 }

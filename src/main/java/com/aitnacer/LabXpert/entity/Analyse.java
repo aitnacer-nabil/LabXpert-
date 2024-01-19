@@ -1,8 +1,6 @@
 package com.aitnacer.LabXpert.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +10,8 @@ import java.util.List;
 @Table(name = "analysis")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

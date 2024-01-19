@@ -1,5 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,14 +10,16 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class TestStandardValue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String unite;
-    private float minValue;
-    private float maxValue;
+    private double minValue;
+    private double maxValue;
 
     @OneToOne(mappedBy = "testStandardValue")
     private Test test;
