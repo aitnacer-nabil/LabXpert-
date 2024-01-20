@@ -18,8 +18,9 @@ public class TypeAnalyse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    @OneToMany(mappedBy = "typeAnalyse", fetch = FetchType.LAZY)
-    private List<TestAnalyse> testAnalyses;
+    @ManyToOne
+    @JoinColumn(name = "analyse_id")
+    private Analyse analyse;
 
 
 }

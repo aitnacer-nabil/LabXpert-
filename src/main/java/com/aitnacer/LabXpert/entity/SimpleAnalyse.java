@@ -19,7 +19,6 @@ public class SimpleAnalyse {
     private Utilisateur utilisateur;
     @ManyToOne
     private Echantillon echantillon;
-    @OneToMany(mappedBy = "simpleAnalyse")
-    private List<Analyse> analyses;
+
 
 }

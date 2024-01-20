@@ -17,10 +17,7 @@ public class TestAnalyse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private TestValeur testValeur;
-    @ManyToOne
-    private TypeAnalyse typeAnalyse;
+
 
 
     private float result;

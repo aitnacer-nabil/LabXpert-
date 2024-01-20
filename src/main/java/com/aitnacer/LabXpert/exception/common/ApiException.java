@@ -18,6 +18,12 @@ public class ApiException extends  RuntimeException implements Supplier<ApiExcep
         this.statusCode = status.value();
     }
 
+    public ApiException(String message,long id) {
+        super( message +String.format(" Id : %s",id));
+        this.status = HttpStatus.BAD_REQUEST;
+
+        this.statusCode = status.value();
+    }
 
     @Override
     public ApiException get() {
