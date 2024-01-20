@@ -61,6 +61,12 @@ public class TypeAnalyseServiceImpl implements ITypeAnalyseService {
     }
 
     @Override
+    public List<TypeAnalyseDto> getAllTypeAnalysesForAnalysis(long analysisId) {
+        List<TypeAnalyse> typeAnalyses = typeAnalyseRepository.findByAnalyse_IdAndDeletedFalse(analysisId);
+        return typeAnalyses.stream().map((element) -> modelMapper.map(element, TypeAnalyseDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
     public void deleteTypeAnalyse(Long id) {
         TypeAnalyse typeAnalyse = typeAnalyseRepository.findByIdAndDeletedFalse(id)
                 .orElseThrow(() -> new ApiException("TypeAnalyse not found with  ", id));

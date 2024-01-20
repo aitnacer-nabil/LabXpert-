@@ -13,6 +13,6 @@ public interface ITypeAnalyseService {
     TypeAnalyseDto createTypeAnalyse(TypeAnalyseDto typeAnalyseDto);
 
     TypeAnalyseDto updateTypeAnalyse(Long id, TypeAnalyseDto typeAnalyseDto);
-
+     List<TypeAnalyseDto> getAllTypeAnalysesForAnalysis(long analysisId);
     void deleteTypeAnalyse(Long id);
 }

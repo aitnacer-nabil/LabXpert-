@@ -10,4 +10,5 @@ public interface TypeAnalyseRepository extends JpaRepository<TypeAnalyse,Long> {
 
     List<TypeAnalyse> findByDeletedFalse();
     Optional<TypeAnalyse> findByIdAndDeletedFalse(Long id);
+    List<TypeAnalyse> findByAnalyse_IdAndDeletedFalse(long analyseID);
 }
