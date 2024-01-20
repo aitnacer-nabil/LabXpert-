@@ -24,12 +24,8 @@ public class Echantillon {
     private String echantillonCode;
     @ManyToOne
     private Patient patient;
-
     @ManyToOne
     private Utilisateur utilisateur;
-    @OneToMany(mappedBy = "echantillon")
-    private List<SimpleAnalyse> simpleAnalyses;
-
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
 

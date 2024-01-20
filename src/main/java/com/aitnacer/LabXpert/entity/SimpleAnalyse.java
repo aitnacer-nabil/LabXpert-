@@ -15,10 +15,12 @@ public class SimpleAnalyse {
     private String nom;
     @Enumerated(EnumType.STRING)
     private AnalyseStatus status;
-    @OneToOne
+    @ManyToOne
     private Utilisateur utilisateur;
     @ManyToOne
     private Echantillon echantillon;
+    @ManyToOne
+    private Analyse analyse;
 
 
 }

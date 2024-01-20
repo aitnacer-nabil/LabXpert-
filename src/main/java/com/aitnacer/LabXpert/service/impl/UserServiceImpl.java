@@ -40,7 +40,7 @@ public class UserServiceImpl implements IUserService {
     }
     public UtilisateurDto updateUtilisateur(Long id , UtilisateurDto administrateurDto){
         //TODO trow exption not found and validation
-        Utilisateur existingdUtilisateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
+        Utilisateur existingdUtilisateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ApiException("user not found with  ", id));
         //TODO validation
         existingdUtilisateur.setPrenom(administrateurDto.getPrenom());
         existingdUtilisateur.setNom(administrateurDto.getNom());

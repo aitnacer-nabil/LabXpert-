@@ -2,6 +2,7 @@ package com.aitnacer.LabXpert.service.impl;
 
 import com.aitnacer.LabXpert.dtos.PatientDto;
 import com.aitnacer.LabXpert.entity.Patient;
+import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.PatientRepository;
 import com.aitnacer.LabXpert.service.IPatientService;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class PatientServiveImp implements IPatientService {
 
     @Override
     public PatientDto getPatientById(Long id) {
-        Patient patient = patientRepository.findByIdAndDeletedFalse(id).orElse(null);
+        Patient patient = patientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ApiException("patient not found with  ", id));
 
         return modelMapper.map(patient, PatientDto.class);
     }
@@ -48,7 +49,7 @@ public class PatientServiveImp implements IPatientService {
     @Override
     public PatientDto updatePatient(Long id, PatientDto patientDto) {
         //TODO trow exption not found and validation
-        Patient existingPatient = patientRepository.findByIdAndDeletedFalse(id).orElse(null);
+        Patient existingPatient = patientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ApiException("patient not found with  ", id));
         //TODO validation
         existingPatient.setPrenom(patientDto.getPrenom());
         existingPatient.setNom(patientDto.getNom());
@@ -64,7 +65,7 @@ public class PatientServiveImp implements IPatientService {
     @Override
     public void deletePatient(Long id) {
         //TODO add exption
-        Patient patient = patientRepository.findByIdAndDeletedFalse(id).orElse(null);
+        Patient patient = patientRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ApiException("patient not found with  ", id));
         patient.setDeleted(true);
         patientRepository.save(patient);
 
