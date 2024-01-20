@@ -17,6 +17,7 @@ import com.aitnacer.LabXpert.service.IEchantillonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,14 +34,13 @@ public class EchantillonServiceImpl implements IEchantillonService {
     private final ModelMapper modelMapper;
 
 
-
     @Override
     public List<EchantillonDto> getAllEchantillons() {
         List<Echantillon> echantillons = echantillonRepository.findByDeletedFalse();
 
         return echantillons.stream().map((element) -> {
             System.out.println(element);
-           return modelMapper.map(element, EchantillonDto.class);
+            return modelMapper.map(element, EchantillonDto.class);
         }).collect(Collectors.toList());
     }
 
@@ -53,7 +53,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonDto createEchantillon(EchantillonRequestDto echantillonRequestDto) {
-        log.info("Echantiollon DTO",echantillonRequestDto);
+        log.info("Echantiollon DTO", echantillonRequestDto);
         System.out.println(echantillonRequestDto);
         Echantillon echantillon = modelMapper.map(echantillonRequestDto, Echantillon.class);
         System.out.println(echantillon);
@@ -71,7 +71,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
             Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(echantillonRequestDto.getUtilisateurId()).orElseThrow(() -> new ApiException("utilisateur not found with  ", echantillonRequestDto.getUtilisateurId()));
             echantillon.setUtilisateur(utilisateur);
         }
-        if (echantillon.getPatient().getId() != echantillonRequestDto.getPatientId()){
+        if (echantillon.getPatient().getId() != echantillonRequestDto.getPatientId()) {
             Patient patient = patientRepository.findByIdAndDeletedFalse(echantillonRequestDto.getPatientId()).orElseThrow(() -> new ApiException("patient not found with  ", echantillonRequestDto.getPatientId()));
             echantillon.setPatient(patient);
         }
@@ -88,13 +88,20 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public PatientEchantillonDto getEchantillonsByPatientId(long patientId) {
-        Patient patient = patientRepository.findByIdAndDeletedFalse(patientId).orElseThrow(() -> new ApiException("patient not found with  ", patientId));
+        Patient patient = patientRepository.findByIdAndDeletedFalse(patientId).orElseThrow(() -> new ApiException("Patient not found with  ", patientId));
         List<Echantillon> echantillons = echantillonRepository.findByPatient_IdAndDeletedFalse(patientId);
         PatientEchantillonDto patientEchantillonDto = PatientEchantillonDto.builder()
                 .patient(modelMapper.map(patient, PatientIdDto.class))
                 .echantillons(echantillons.stream().map((element) -> modelMapper.map(element, EchantillonNoPatientIdDto.class)).collect(Collectors.toList()))
                 .build();
         return patientEchantillonDto;
+    }
+
+    @Override
+    public EchantillonDto getEchantillonsByPatientIdAndCode(long patientId, String echantillonCode) {
+        Patient patient = patientRepository.findByIdAndDeletedFalse(patientId).orElseThrow(() -> new ApiException("Patient not found with  ", patientId));
+        Echantillon echantillon = echantillonRepository.findByPatient_IdAndDeletedFalseAndEchantillonCode(patientId, echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :"+echantillonCode, HttpStatus.BAD_REQUEST ));
+        return modelMapper.map(echantillon, EchantillonDto.class);
     }
 
     private static String generateCode() {

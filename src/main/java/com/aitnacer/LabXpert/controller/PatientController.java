@@ -1,5 +1,6 @@
 package com.aitnacer.LabXpert.controller;
 
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
 import com.aitnacer.LabXpert.dtos.patient.PatientDto;
 import com.aitnacer.LabXpert.dtos.patient.PatientEchantillonDto;
 import com.aitnacer.LabXpert.service.IEchantillonService;
@@ -33,6 +34,11 @@ public class PatientController {
     public ResponseEntity<PatientEchantillonDto> getEchantillonsByPatientId(@PathVariable(name = "id") Long id) {
 
         return ResponseEntity.ok(iEchantillonService.getEchantillonsByPatientId(id));
+    }
+    @GetMapping("/{id}/echantillons/{echantillonCode}")
+    public ResponseEntity<EchantillonDto> getEchantillonByPatientIdAndCode(@PathVariable(name = "id") Long id, @PathVariable(name = "echantillonCode") String echantillonCode) {
+
+        return ResponseEntity.ok(iEchantillonService.getEchantillonsByPatientIdAndCode(id,echantillonCode));
     }
     @PostMapping
     public ResponseEntity<PatientDto> createPatient( @RequestBody PatientDto patientDto) {

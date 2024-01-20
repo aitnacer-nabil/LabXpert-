@@ -18,4 +18,5 @@ public interface IEchantillonService {
 
     void deleteEchantillon(Long id);
     PatientEchantillonDto getEchantillonsByPatientId(long patientId);
+    EchantillonDto getEchantillonsByPatientIdAndCode(long patientId , String echantillonCode);
 }
