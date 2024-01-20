@@ -11,5 +11,7 @@ public interface EchantillonRepository extends JpaRepository<Echantillon,Long> {
     List<Echantillon> findByDeletedFalse();
     Optional<Echantillon> findByIdAndDeletedFalse(Long id);
     List<Echantillon> findByPatient_IdAndDeletedFalse(long patientId);
+    List<Echantillon> findByUtilisateur_IdAndDeletedFalse(long patientId);
     Optional<Echantillon> findByPatient_IdAndDeletedFalseAndEchantillonCode(long patientId,String echantillonCode);
+    Optional<Echantillon> findByUtilisateur_IdAndDeletedFalseAndEchantillonCode(long patientId,String echantillonCode);
 }
