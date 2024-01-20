@@ -104,7 +104,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonUser getEchantillonByUserId(long userId) {
-        Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(userId).orElseThrow(() -> new ApiException("utilisateur not found with  ", userId));
+        userRepository.findByIdAndDeletedFalse(userId).orElseThrow(() -> new ApiException("utilisateur not found with  ", userId));
         List<Echantillon> echantillons = echantillonRepository.findByUtilisateur_IdAndDeletedFalse(userId);
         List<EchantillonNoUserIdDto> echantillonNoUserIdDtos = echantillons.stream().map((element) -> modelMapper.map(element, EchantillonNoUserIdDto.class)).collect(Collectors.toList());
         return EchantillonUser.builder().id(userId).echantillons(echantillonNoUserIdDtos).build();
@@ -112,7 +112,9 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonDto getEchantillonByUserIdByCode(long userId, String echantillonCode) {
-        return null;
+        userRepository.findByIdAndDeletedFalse(userId).orElseThrow(() -> new ApiException("utilisateur not found with  ", userId));
+        Echantillon echantillon =echantillonRepository.findByUtilisateur_IdAndDeletedFalseAndEchantillonCode(userId,echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :"+echantillonCode, HttpStatus.BAD_REQUEST ));
+        return modelMapper.map(echantillon, EchantillonDto.class);
     }
 
     private static String generateCode() {
