@@ -2,14 +2,17 @@ package com.aitnacer.LabXpert.service.impl;
 
 import com.aitnacer.LabXpert.dtos.TestDto;
 import com.aitnacer.LabXpert.entity.Test;
+import com.aitnacer.LabXpert.entity.TypeAnalyse;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.TestRepository;
+import com.aitnacer.LabXpert.repository.TypeAnalyseRepository;
 import com.aitnacer.LabXpert.service.ITestService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import static com.aitnacer.LabXpert.utils.Utils.isStringValid;
 @AllArgsConstructor
 public class TestService implements ITestService {
     private final TestRepository testRepository;
+    private final TypeAnalyseRepository typeAnalyseRepository;
     private final ModelMapper modelMapper;
     @Override
     public List<TestDto> getAllTest() {
@@ -35,53 +39,33 @@ public class TestService implements ITestService {
 
     @Override
     public TestDto createTest(TestDto testDto) {
-        Test testValide = validateTestValeurDto(testDto);
-        Test test = testRepository.save(testValide);
-
+        Test test = testRepository.save(modelMapper.map(testDto, Test.class));
         return modelMapper.map(test, TestDto.class);
     }
 
     @Override
     public TestDto updateTest(Long id, TestDto testDto) {
-        testRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No testValeur found for this id %s",id), HttpStatus.BAD_REQUEST));
-        Test testValidated = validateTestValeurDto(testDto);
-        testValidated.setId(id);
-        Test test = testRepository.save(testValidated);
-        return modelMapper.map(test, TestDto.class);
+        Test test = testRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No testValeur found for this id %s",id), HttpStatus.BAD_REQUEST));
+
+        if (test.getTypeAnalyse().getId() != testDto.getTypeAnalyseId()){
+            System.out.println(test.getTypeAnalyse().getId());
+            System.out.println(testDto.getTypeAnalyseId());
+            TypeAnalyse typeAnalyse = typeAnalyseRepository.findByIdAndDeletedFalse(testDto.getTypeAnalyseId()).orElseThrow(new ApiException("No testValeur found for this id %s",id));
+                test.setTypeAnalyse(null);
+                test.setTypeAnalyse(typeAnalyse);
+        }
+
+
+        test.setUpdatedAt(LocalDateTime.now());
+        test.setNom(testDto.getNom());
+        test.setUnit(testDto.getUnit());
+        test.setMinValue(testDto.getMinValue());
+        test.setMaxValue(testDto.getMaxValue());
+
+        Test updatedTest = testRepository.save(test);
+
+        return modelMapper.map(updatedTest, TestDto.class);
 
     }
-    private Test validateTestValeurDto(TestDto testDto){
-        Test test = new Test();
-        String newNom = testDto.getNom();
-        if (isStringValid(newNom, 2)) {
-            test.setNom(newNom);
-        } else {
-            throw new ApiException("Invalid 'nom' field. It must not be null, empty, and should have a minimum length of 2 characters.", HttpStatus.BAD_REQUEST);
-        }
 
-        // Validate the 'unit' field
-        String newUnit = testDto.getUnit();
-        if (isStringValid(newUnit, 0)) {
-            test.setUnit(newUnit);
-        } else {
-            throw new ApiException("Invalid 'unit' field. It must not be null.", HttpStatus.BAD_REQUEST);
-        }
-
-        // Validate the 'minValue' field
-        float newMinValue = testDto.getMinValue();
-        if (newMinValue >= 0) {
-            test.setMinValue(newMinValue);
-        } else {
-            throw new ApiException("Invalid 'minValue' field. It must be greater than or equal to 0.", HttpStatus.BAD_REQUEST);
-        }
-
-        // Validate the 'maxValue' field
-        float newMaxValue = testDto.getMaxValue();
-        if (newMaxValue >= 0) {
-            test.setMaxValue(newMaxValue);
-        } else {
-            throw new ApiException("Invalid 'maxValue' field. It must be greater than or equal to 0.", HttpStatus.BAD_REQUEST);
-        }
-        return test;
-    }
 }

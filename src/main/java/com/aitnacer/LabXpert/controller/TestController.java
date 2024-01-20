@@ -16,29 +16,29 @@ import java.util.List;
 @RequestMapping(Constant.BASE_API_URL +"test")
 @AllArgsConstructor
 @Slf4j
-public class TestValeurController {
-    private final ITestService testValeurService;
+public class TestController {
+    private final ITestService testService;
     @PostMapping
     public ResponseEntity<TestDto> createTest(@Valid @RequestBody TestDto testDto) {
-        TestDto createdTest = testValeurService.createTest(testDto);
+        TestDto createdTest = testService.createTest(testDto);
         return new ResponseEntity<>(createdTest, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TestDto> getTest(@PathVariable Long id) {
-        TestDto retrievedTest = testValeurService.getTestById(id);
+        TestDto retrievedTest = testService.getTestById(id);
         return new ResponseEntity<>(retrievedTest, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<List<TestDto>> getAllTests() {
-        List<TestDto> allTests = testValeurService.getAllTest();
+        List<TestDto> allTests = testService.getAllTest();
         return new ResponseEntity<>(allTests, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TestDto> updateTest(@PathVariable Long id, @Valid @RequestBody TestDto testDto) {
-        TestDto updatedTest = testValeurService.updateTest(id, testDto);
+        TestDto updatedTest = testService.updateTest(id, testDto);
         return new ResponseEntity<>(updatedTest, HttpStatus.OK);
     }
 

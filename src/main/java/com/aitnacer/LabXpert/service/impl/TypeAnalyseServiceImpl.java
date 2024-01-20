@@ -55,6 +55,7 @@ public class TypeAnalyseServiceImpl implements ITypeAnalyseService {
             existingTypeAnalyse.setAnalyse(null);
             existingTypeAnalyse.setAnalyse(analyse);
         }
+       existingTypeAnalyse.setNom(typeAnalyseDto.getNom());
         TypeAnalyse updatedTypeAnalyse = typeAnalyseRepository.save(existingTypeAnalyse);
         return modelMapper.map(updatedTypeAnalyse, TypeAnalyseDto.class);
     }
