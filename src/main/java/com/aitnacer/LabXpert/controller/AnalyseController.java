@@ -1,8 +1,10 @@
 package com.aitnacer.LabXpert.controller;
 
 import com.aitnacer.LabXpert.dtos.AnalyseDto;
+import com.aitnacer.LabXpert.dtos.TestDto;
 import com.aitnacer.LabXpert.dtos.TypeAnalyseDto;
 import com.aitnacer.LabXpert.service.IAnalyseService;
+import com.aitnacer.LabXpert.service.ITestService;
 import com.aitnacer.LabXpert.service.ITypeAnalyseService;
 import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;
@@ -24,6 +26,7 @@ public class AnalyseController {
 
     private IAnalyseService analyseService;
     private ITypeAnalyseService typeAnalyseService;
+    private ITestService testService;
 
     @PostMapping
     public ResponseEntity<AnalyseDto> createAnalyse(@Valid @RequestBody AnalyseDto analyseDto) {
@@ -40,6 +43,12 @@ public class AnalyseController {
     public ResponseEntity<List<TypeAnalyseDto>> getAllTypeAnalysesForAnalysis(@PathVariable Long id) {
         List<TypeAnalyseDto> typeAnalyseDtos = typeAnalyseService.getAllTypeAnalysesForAnalysis(id);
         return new ResponseEntity<>(typeAnalyseDtos, HttpStatus.OK);
+    }
+    @GetMapping("/{analysisId}/type-analyses/{typeAnalyseId}/tests")
+    public ResponseEntity<List<TestDto>> findALLByTypeAnalyseAndAnalyse(@PathVariable Long analysisId,@PathVariable Long typeAnalyseId) {
+        List<TestDto> allByTypeAnalyseAndAnalyse = testService.findALLByTypeAnalyseAndAnalyse(analysisId,typeAnalyseId);
+
+        return new ResponseEntity<>(allByTypeAnalyseAndAnalyse, HttpStatus.OK);
     }
 
     @GetMapping

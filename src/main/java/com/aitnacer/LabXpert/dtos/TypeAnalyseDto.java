@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * DTO for {@link com.aitnacer.LabXpert.entity.TypeAnalyse}
@@ -23,4 +24,5 @@ public class TypeAnalyseDto implements Serializable {
     Long analyseId;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+    List<TestDto> tests;
 }

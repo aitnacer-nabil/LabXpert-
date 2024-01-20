@@ -68,4 +68,11 @@ public class TestService implements ITestService {
 
     }
 
+    @Override
+    public List<TestDto> findALLByTypeAnalyseAndAnalyse(long analysisId, long typeAnalyseId) {
+        List<Test> tests = testRepository.findALLByTypeAnalyseAndAnalyse(analysisId,typeAnalyseId);
+
+        return tests.stream().map((element) -> modelMapper.map(element, TestDto.class)).collect(Collectors.toList());
+    }
+
 }

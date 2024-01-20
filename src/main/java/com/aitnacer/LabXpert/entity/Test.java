@@ -42,7 +42,5 @@ public class Test {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-
 }
 

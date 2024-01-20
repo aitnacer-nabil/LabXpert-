@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * DTO for {@link com.aitnacer.LabXpert.entity.Analyse}
@@ -23,4 +24,5 @@ public class AnalyseDto implements Serializable {
     String nom;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+    List<TypeAnalyseDto> typeAnalyses;
 }
