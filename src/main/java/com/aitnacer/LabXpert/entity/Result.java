@@ -11,9 +11,6 @@ public class Result {
 
     private float result;
 
-    @ManyToOne
-    @JoinColumn(name = "analyse_id")
-    private TestAnalyse  testAnalyse;
 
     @ManyToOne
     @JoinColumn(name = "simple_analyse_id")

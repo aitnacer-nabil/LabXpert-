@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.exception;
 
 import com.aitnacer.LabXpert.exception.common.ApiException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +31,14 @@ public class ApiExceptionHandler {
         });
 
         errors.put("validationErrors", validationErrors);
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("message", "Resource already exists");
+        errors.put("status", HttpStatus.BAD_REQUEST);
+        errors.put("statusCode", HttpStatus.BAD_REQUEST.value() + "");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 

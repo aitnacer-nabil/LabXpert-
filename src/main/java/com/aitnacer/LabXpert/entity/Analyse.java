@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "analysis")
+@Table(name = "analysis" ,uniqueConstraints = {@UniqueConstraint(columnNames = "nom", name = "uk_analysis_nom")})
 @Data
 @NoArgsConstructor
 @Builder
