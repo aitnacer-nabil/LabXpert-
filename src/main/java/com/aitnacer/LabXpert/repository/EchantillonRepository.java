@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface EchantillonRepository extends JpaRepository<Echantillon,Long> {
     List<Echantillon> findByDeletedFalse();
     Optional<Echantillon> findByIdAndDeletedFalse(Long id);
+    List<Echantillon> findByPatient_IdAndDeletedFalse(long patientId);
+    Echantillon findByPatient_IdAndDeletedFalseAndEchantillonCode(long patientId,String echantillonCode);
 }

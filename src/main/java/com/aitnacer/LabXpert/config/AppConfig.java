@@ -1,7 +1,6 @@
 package com.aitnacer.LabXpert.config;
 
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
-import com.aitnacer.LabXpert.dtos.EchantillonRequestDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
 import com.aitnacer.LabXpert.entity.Echantillon;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

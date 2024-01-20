@@ -1,7 +1,7 @@
 package com.aitnacer.LabXpert.controller;
 
-import com.aitnacer.LabXpert.dtos.EchantillonRequestDto;
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonRequestDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
 import com.aitnacer.LabXpert.service.IEchantillonService;
 import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;

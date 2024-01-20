@@ -1,6 +1,6 @@
 package com.aitnacer.LabXpert.controller;
 
-import com.aitnacer.LabXpert.dtos.EchantillonView;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonView;
 import com.aitnacer.LabXpert.dtos.UtilisateurDto;
 import com.aitnacer.LabXpert.service.impl.UserServiceImpl;
 import com.aitnacer.LabXpert.utils.Constant;

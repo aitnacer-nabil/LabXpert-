@@ -1,6 +1,6 @@
 package com.aitnacer.LabXpert.service.impl;
 
-import com.aitnacer.LabXpert.dtos.PatientDto;
+import com.aitnacer.LabXpert.dtos.patient.PatientDto;
 import com.aitnacer.LabXpert.entity.Patient;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.PatientRepository;
@@ -8,7 +8,6 @@ import com.aitnacer.LabXpert.service.IPatientService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

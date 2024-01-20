@@ -1,4 +1,4 @@
-package com.aitnacer.LabXpert.dtos;
+package com.aitnacer.LabXpert.dtos.echantillon;
 
 import lombok.*;
 

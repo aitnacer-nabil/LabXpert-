@@ -1,7 +1,11 @@
 package com.aitnacer.LabXpert.service.impl;
 
-import com.aitnacer.LabXpert.dtos.EchantillonRequestDto;
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonNoPatientIdDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonRequestDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.patient.PatientDto;
+import com.aitnacer.LabXpert.dtos.patient.PatientEchantillonDto;
+import com.aitnacer.LabXpert.dtos.patient.PatientIdDto;
 import com.aitnacer.LabXpert.entity.Echantillon;
 import com.aitnacer.LabXpert.entity.Patient;
 import com.aitnacer.LabXpert.entity.Utilisateur;
@@ -81,6 +85,18 @@ public class EchantillonServiceImpl implements IEchantillonService {
         echantillon.setDeleted(false);
         echantillonRepository.save(echantillon);
     }
+
+    @Override
+    public PatientEchantillonDto getEchantillonsByPatientId(long patientId) {
+        Patient patient = patientRepository.findByIdAndDeletedFalse(patientId).orElseThrow(() -> new ApiException("patient not found with  ", patientId));
+        List<Echantillon> echantillons = echantillonRepository.findByPatient_IdAndDeletedFalse(patientId);
+        PatientEchantillonDto patientEchantillonDto = PatientEchantillonDto.builder()
+                .patient(modelMapper.map(patient, PatientIdDto.class))
+                .echantillons(echantillons.stream().map((element) -> modelMapper.map(element, EchantillonNoPatientIdDto.class)).collect(Collectors.toList()))
+                .build();
+        return patientEchantillonDto;
+    }
+
     private static String generateCode() {
         StringBuilder codeBuilder = new StringBuilder();
 

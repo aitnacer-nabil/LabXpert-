@@ -1,5 +1,6 @@
-package com.aitnacer.LabXpert.dtos;
+package com.aitnacer.LabXpert.dtos.patient;
 
+import com.aitnacer.LabXpert.entity.Echantillon;
 import com.aitnacer.LabXpert.entity.EnumSexe;
 import lombok.*;
 

@@ -1,7 +1,8 @@
 package com.aitnacer.LabXpert.service;
 
-import com.aitnacer.LabXpert.dtos.EchantillonRequestDto;
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonRequestDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.patient.PatientEchantillonDto;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface IEchantillonService {
     EchantillonDto updateEChantillon(Long id, EchantillonDto  echantillonDto);
 
     void deleteEchantillon(Long id);
+    PatientEchantillonDto getEchantillonsByPatientId(long patientId);
 }
