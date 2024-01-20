@@ -16,8 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Patient extends UtilisateurInfo {
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    private List<Echantillon> echantillons;
+
     @Builder
     public Patient(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted) {
         super(id, nom, prenom, Adresse, telephone, sexe, deleted);

@@ -1,7 +1,7 @@
 package com.aitnacer.LabXpert.service;
 
+import com.aitnacer.LabXpert.dtos.EchantillonRequestDto;
 import com.aitnacer.LabXpert.dtos.EchantillonDto;
-import lombok.extern.java.Log;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ public interface IEchantillonService {
 
     EchantillonDto getEchantillonsById(Long id);
 
-    EchantillonDto createEchantillon(EchantillonDto echantillonDto);
+    EchantillonDto createEchantillon(EchantillonRequestDto echantillonRequestDto);
 
-    EchantillonDto updateEChantillon(Long id, EchantillonDto echantillonDto);
+    EchantillonDto updateEChantillon(Long id, EchantillonDto  echantillonDto);
 
-    void deleteEchantillon(Log id);
+    void deleteEchantillon(Long id);
 }

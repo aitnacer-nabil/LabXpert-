@@ -21,5 +21,5 @@ public class PatientDto implements Serializable {
     String telephone;
     EnumSexe sexe;
     boolean deleted;
-    List<EchantillonDto> echantillons;
+
 }

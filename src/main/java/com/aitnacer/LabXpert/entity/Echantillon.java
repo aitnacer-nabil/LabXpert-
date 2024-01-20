@@ -1,9 +1,8 @@
 package com.aitnacer.LabXpert.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,9 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "echantillons")
 @Data
-@NoArgsConstructor
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Echantillon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +27,14 @@ public class Echantillon {
     private Utilisateur utilisateur;
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+
 
 
 }
