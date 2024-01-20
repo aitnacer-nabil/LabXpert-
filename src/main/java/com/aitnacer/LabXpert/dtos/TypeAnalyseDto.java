@@ -5,6 +5,7 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * DTO for {@link com.aitnacer.LabXpert.entity.TypeAnalyse}
@@ -20,4 +21,6 @@ public class TypeAnalyseDto implements Serializable {
     String nom;
     @NotNull(message = "Analyse ID cannot be null")
     Long analyseId;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 }

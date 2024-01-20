@@ -17,7 +17,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-
+//TODO handle DefaultHandlerExceptionResolver
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleValidationException(ConstraintViolationException ex) {
         Map<String, Object> errors = new HashMap<>();
