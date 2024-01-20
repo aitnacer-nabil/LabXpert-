@@ -16,28 +16,12 @@ public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateDebut;
-    private String Commentaire;
     private String nom;
-    @ManyToOne
-    private Echantillon echantillon;
-    @Enumerated(EnumType.STRING)
-    private AnalyseStatus status;
-
-    @OneToMany(mappedBy = "analyse",fetch = FetchType.EAGER)
-    private List<TypeAnalyse> typeAnalyses;
-    @OneToOne
-    private Utilisateur utilisateur;
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
-    @Override
-    public String toString() {
-        return "Analyse{" +
-                "id=" + id +
-                ", dateDebut=" + dateDebut +
-                ", Commentaire='" + Commentaire + '\'' +
-                ", nom='" + nom + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    @OneToMany
+    List<TypeAnalyse> typeAnalyses;
+    @ManyToOne
+    @JoinColumn(name = "simple_analyse_id")
+    private SimpleAnalyse simpleAnalyse;
 }

@@ -5,21 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "type_analyse")
+@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TypeAnalyse {
+public class TestAnalyse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    @OneToMany(mappedBy = "typeAnalyse", fetch = FetchType.LAZY)
-    private List<TestAnalyse> testAnalyses;
 
+    @ManyToOne
+    private TestValeur testValeur;
+    @ManyToOne
+    private TypeAnalyse typeAnalyse;
+
+
+    private float result;
 
 }

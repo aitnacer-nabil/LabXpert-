@@ -34,8 +34,6 @@ public class EchantillonDto implements Serializable {
     @JsonView(EchantillonView.FullResponse.class)
     UtilisateurDto utilisateurDto;
     @JsonView(EchantillonView.FullResponse.class)
-    List<AnalyseDto> analyses;
-    @JsonView(EchantillonView.FullResponse.class)
     List<Long> analysesId;
     @JsonView(EchantillonView.Response.class)
     boolean deleted;

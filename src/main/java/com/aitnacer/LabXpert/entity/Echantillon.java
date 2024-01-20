@@ -24,33 +24,14 @@ public class Echantillon {
     private String echantillonCode;
     @ManyToOne
     private Patient patient;
+
     @ManyToOne
     private Utilisateur utilisateur;
-    @OneToMany(mappedBy = "echantillon",fetch = FetchType.EAGER)
-    private List<Analyse> analyses;
+    @OneToMany(mappedBy = "echantillon")
+    private List<SimpleAnalyse> simpleAnalyses;
+
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
-    @Override
-    public String toString() {
-        return "Echantillon{" +
-                "id=" + id +
-                ", dateDeReception=" + dateDeReception +
-                ", echantillonCode='" + echantillonCode + '\'' +
-                '}';
-    }
-    @PrePersist
-    private void prePersist() {
-        if (patient != null) {
-            if (patient.getEchantillons() == null) {
-                patient.setEchantillons(new ArrayList<>());
-            }
-            patient.getEchantillons().add(this);
-        }
-        if (utilisateur != null){
-            if(utilisateur.getEchantillons() == null ){
-                utilisateur.setEchantillons(new ArrayList<>());
-            }
-            utilisateur.getEchantillons().add(this);
-        }
-    }
+
+
 }

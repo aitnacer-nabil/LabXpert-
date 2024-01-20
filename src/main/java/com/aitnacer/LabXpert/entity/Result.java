@@ -1,23 +1,21 @@
 package com.aitnacer.LabXpert.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "result")
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private double result;
+    private float result;
 
+    @ManyToOne
+    @JoinColumn(name = "analyse_id")
+    private TestAnalyse  testAnalyse;
+
+    @ManyToOne
+    @JoinColumn(name = "simple_analyse_id")
+    private SimpleAnalyse simpleAnalyse;
 }
