@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,6 +38,21 @@ public class AnalyseController {
     @GetMapping("/{id}")
     public ResponseEntity<AnalyseDto> getAnalyseById(@PathVariable Long id) {
         AnalyseDto retrievedAnalyse = analyseService.getAnalyseById(id);
+        return new ResponseEntity<>(retrievedAnalyse, HttpStatus.OK);
+    }
+    @GetMapping("/{id}/all")
+    public ResponseEntity<AnalyseDto> getAnalyseAll(@PathVariable Long id) {
+        AnalyseDto retrievedAnalyse = analyseService.getAnalyseById(id);
+        List<TypeAnalyseDto> typeAnalyseDtos = typeAnalyseService.getAllTypeAnalysesForAnalysis(id);
+        typeAnalyseDtos.forEach(typeAnalyseDto -> {
+            List<TestDto>  allByTypeAnalyseAndAnalyse = testService.findALLByTypeAnalyseAndAnalyse(id,typeAnalyseDto.getId());
+            if (typeAnalyseDto.getTests() == null){
+                typeAnalyseDto.setTests(new ArrayList<>());
+            }
+            typeAnalyseDto.getTests().addAll(allByTypeAnalyseAndAnalyse);
+        });
+        retrievedAnalyse.setTypeAnalyses(typeAnalyseDtos);
+
         return new ResponseEntity<>(retrievedAnalyse, HttpStatus.OK);
     }
     @GetMapping("/{id}/type-analyses")

@@ -19,4 +19,5 @@ public interface TestRepository extends JpaRepository<Test, Long> {
             "and t.deleted = false "
     )
     List<Test> findALLByTypeAnalyseAndAnalyse(@Param("analyseId") long analyseId,@Param("typeAnalyseId") long typeAnalyseId);
+
 }
