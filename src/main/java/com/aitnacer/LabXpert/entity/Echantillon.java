@@ -27,6 +27,9 @@ public class Echantillon {
     private Utilisateur utilisateur;
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
+    @Column(name = "is_assigned", nullable = false)
+    private boolean assigned;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

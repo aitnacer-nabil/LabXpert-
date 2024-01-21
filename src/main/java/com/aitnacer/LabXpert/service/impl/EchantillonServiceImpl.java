@@ -120,13 +120,10 @@ public class EchantillonServiceImpl implements IEchantillonService {
     private static String generateCode() {
         StringBuilder codeBuilder = new StringBuilder();
 
-        // Add a prefix (e.g., "ADE")
-        codeBuilder.append("ADE");
-
+        codeBuilder.append("NAB");
         // Add a random numeric part (you can customize this part)
         int numericPart = (int) (Math.random() * 10000);
         codeBuilder.append(String.format("%04d", numericPart));
-
         return codeBuilder.toString();
     }
 }

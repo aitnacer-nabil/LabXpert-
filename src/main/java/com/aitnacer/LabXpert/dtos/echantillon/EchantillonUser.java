@@ -14,4 +14,5 @@ import java.util.List;
 public class EchantillonUser {
     private  Long id;
     List<EchantillonNoUserIdDto> echantillons;
+
 }

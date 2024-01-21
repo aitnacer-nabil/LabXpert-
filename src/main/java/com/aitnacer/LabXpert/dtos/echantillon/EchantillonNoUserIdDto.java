@@ -14,6 +14,7 @@ public class EchantillonNoUserIdDto {
         Long id;
         LocalDateTime dateDeReception;
         String echantillonCode;
+        boolean assigned;
         Long patientId;
         LocalDateTime createdAt;
         LocalDateTime updatedAt;

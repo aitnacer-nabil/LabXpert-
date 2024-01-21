@@ -30,7 +30,7 @@ public class EchantillonDto implements Serializable {
 
     @NotNull(message = "Utilisateur Id cannot be null")
     Long utilisateurId;
-
+    boolean assigned;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 }
