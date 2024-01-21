@@ -1,6 +1,5 @@
 package com.aitnacer.LabXpert.service.impl;
 
-import com.aitnacer.LabXpert.dtos.ResultDto;
 import com.aitnacer.LabXpert.entity.Result;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.ResultRepository;
@@ -8,7 +7,6 @@ import com.aitnacer.LabXpert.service.IResultService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service
 @AllArgsConstructor
 public class ResultServiceImpl implements IResultService {

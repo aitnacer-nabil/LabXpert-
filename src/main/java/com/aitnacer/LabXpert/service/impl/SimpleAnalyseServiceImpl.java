@@ -49,6 +49,11 @@ public class SimpleAnalyseServiceImpl implements ISimpleAnalyseService {
     }
 
     @Override
+    public SimpleAnalyse updateSimpleAnalyse(SimpleAnalyse simpleAnalyse) {
+        return simpleAnalyseRepository.save(simpleAnalyse);
+    }
+
+    @Override
     public List<SimpleAnalyse> getSimpleAnalysesByUtilisateur(Utilisateur utilisateur) {
         //TODO getSimpleAnalysesByUtilisateur
         return null;

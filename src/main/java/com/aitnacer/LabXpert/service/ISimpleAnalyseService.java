@@ -13,6 +13,7 @@ public interface ISimpleAnalyseService {
     SimpleAnalyse getSimpleAnalyseById(Long id);
 
     List<SimpleAnalyse> getAllSimpleAnalyses();
+    SimpleAnalyse updateSimpleAnalyse(SimpleAnalyse simpleAnalyse);
 
     List<SimpleAnalyse> getSimpleAnalysesByUtilisateur(Utilisateur utilisateur);
 }
