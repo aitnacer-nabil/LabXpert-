@@ -27,8 +27,8 @@ public class UserServiceImpl implements IUserService {
         return  utilisateurs.stream().map(administrateur -> modelMapper.map(administrateur, UtilisateurDto.class)).collect(Collectors.toList());
     }
     public UtilisateurDto getUtilisateurById(Long id)  {
-        Utilisateur administrateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No User fond for this   %s",id), HttpStatus.BAD_REQUEST));
-        return modelMapper.map(administrateur, UtilisateurDto.class);
+        Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No User fond for this   %s",id), HttpStatus.BAD_REQUEST));
+        return modelMapper.map(utilisateur, UtilisateurDto.class);
     }
     public UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto){
         // TODO verification for administrateur

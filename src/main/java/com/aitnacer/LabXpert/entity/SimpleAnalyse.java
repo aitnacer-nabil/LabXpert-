@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class SimpleAnalyse {
     private LocalDateTime dateDebut;
     private String Commentaire;
     @Enumerated(EnumType.STRING)
-    private AnalyseStatus status;
+    private AnalyseStatus status= AnalyseStatus.EN_ATTENTE;
     @ManyToOne
     private Utilisateur utilisateur;
     @ManyToOne
@@ -38,5 +39,5 @@ public class SimpleAnalyse {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
     @OneToMany
-    private List<Result> results;
+    private List<Result> results= new ArrayList<>();
 }

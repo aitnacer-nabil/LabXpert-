@@ -5,6 +5,7 @@ import com.aitnacer.LabXpert.entity.Analyse;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.AnalyseRepository;
 import com.aitnacer.LabXpert.service.IAnalyseService;
+import com.aitnacer.LabXpert.utils.EntityExistenceChecker;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class AnalyseServiceImpl implements IAnalyseService {
+public class AnalyseServiceImpl implements IAnalyseService, EntityExistenceChecker<Analyse> {
     private final AnalyseRepository analyseRepository;
     private final ModelMapper modelMapper;
 
@@ -28,7 +29,7 @@ public class AnalyseServiceImpl implements IAnalyseService {
 
     @Override
     public AnalyseDto getAnalyseById(Long id) {
-        Analyse analyse = ifExitsReturnAnalyseOrThrow(id);
+        Analyse analyse = checkExistenceByIdOrThrow(id);
         return modelMapper.map(analyse, AnalyseDto.class);
     }
 
@@ -40,7 +41,7 @@ public class AnalyseServiceImpl implements IAnalyseService {
 
     @Override
     public AnalyseDto updateAnalyse(Long id, AnalyseDto analyseDto) {
-        Analyse analyse = ifExitsReturnAnalyseOrThrow(id);
+        Analyse analyse = checkExistenceByIdOrThrow(id);
         analyse.setNom(analyse.getNom());
         analyse.setUpdatedAt(LocalDateTime.now());
         Analyse updatedAnalyse = analyseRepository.save(analyse);
@@ -53,8 +54,10 @@ public class AnalyseServiceImpl implements IAnalyseService {
     public void deleteAnalyse(Long id) {
         //TODO do something about delete
     }
-    private Analyse ifExitsReturnAnalyseOrThrow(long id){
-        return analyseRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException("Analyse not found with",id));
 
+
+    @Override
+    public Analyse checkExistenceByIdOrThrow(long id) {
+        return analyseRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException("Analyse not found with",id));
     }
 }
