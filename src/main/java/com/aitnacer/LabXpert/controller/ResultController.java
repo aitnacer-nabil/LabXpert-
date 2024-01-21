@@ -1,7 +1,6 @@
 package com.aitnacer.LabXpert.controller;
 
-import com.aitnacer.LabXpert.dtos.AnalyseDto;
-import com.aitnacer.LabXpert.dtos.SimpleAnalyseDto;
+
 import com.aitnacer.LabXpert.dtos.SimpleAnalyseResponseDto;
 import com.aitnacer.LabXpert.dtos.result.ResultRequestDto;
 import com.aitnacer.LabXpert.entity.Result;
@@ -14,7 +13,6 @@ import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
