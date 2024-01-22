@@ -1,0 +1,12 @@
+someKey: value
+anotherKey: Value
+#this is comment
+myObject:
+  stringProperty: ads afsds
+  numberProperty: 123
+  listProperty:
+    - val 1
+    - val 2
+    - myObj:
+        pro: str
+

@@ -32,6 +32,7 @@ public class UtilisateurDto implements Serializable {
     EnumSexe sexe;
     boolean deleted;
     @NotNull(message = "The userName should not be null!")
+    @NotBlank(message = "The password should not be blank!")
     String userName;
     @NotNull(message = "The password should not be null!")
     @NotBlank(message = "The password should not be blank!")
