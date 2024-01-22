@@ -88,8 +88,8 @@ class PatientControllerTest {
 
     @Test
     void getPatiientById() throws Exception {
+
         PatientDto patientDto=PatientDto.builder()
-                //.id(1L)
                 .nom("mpqlùp")
                 .prenom("khawla")
                 .Adresse("quartie")
@@ -99,19 +99,15 @@ class PatientControllerTest {
         Long patientId = 1L;
         when(patientService.getPatientById(patientId)).thenReturn(patientDto);
 
-        ResultActions response = mockMvc.perform(get("/api/v1/patient")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(patientDto)));
+        ResultActions response = mockMvc.perform(get("/api/v1/patient/{id}", patientId)
+                .contentType(MediaType.APPLICATION_JSON));
 
         response.andExpect(status().isOk())
                 .andExpect(jsonPath("$.nom", CoreMatchers.is(patientDto.getNom())))
                 .andExpect(jsonPath("$.prenom", CoreMatchers.is(patientDto.getPrenom())))
                 .andExpect(jsonPath("$.adresse", CoreMatchers.is(patientDto.getAdresse())))
                 .andExpect(jsonPath("$.telephone", CoreMatchers.is(patientDto.getTelephone())))
-                .andExpect(jsonPath("$.sexe", CoreMatchers.is(patientDto.getSexe())))
-
-
-        ;
+                .andExpect(jsonPath("$.sexe", CoreMatchers.is(patientDto.getSexe().toString())));
 
     }
 
@@ -137,7 +133,6 @@ class PatientControllerTest {
                 .content(objectMapper.writeValueAsString(patientDto))
         );
 
-
         //then verify
         responce.andExpect(status().isCreated())
                 //.andExpect(jsonPath("$.id", CoreMatchers.is(patientDto.getId())))
@@ -150,8 +145,7 @@ class PatientControllerTest {
 
     @Test
     void updatePatient() throws Exception {
-        PatientDto patientDto3=PatientDto.builder()
-                //.id(1L)
+        PatientDto patientDto3 = PatientDto.builder()
                 .nom("salma")
                 .prenom("khawla")
                 .Adresse("quartie")
@@ -161,16 +155,15 @@ class PatientControllerTest {
         Long patientid = 1L;
         when(patientService.updatePatient(patientid,patientDto3)).thenReturn(patientDto3);
 
-        ResultActions response = mockMvc.perform(put("/api/v1/patient")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(patientDto3)))
-
-
+        ResultActions response = mockMvc.perform(put("/api/v1/patient/{id}", patientid)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(patientDto3)))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.nom", CoreMatchers.is(patientDto3.getNom())))
-                .andExpect(jsonPath("$.prenom",CoreMatchers.is(patientDto3.getPrenom())))
-                .andExpect(jsonPath("$.adresse",CoreMatchers.is(patientDto3.getAdresse())))
-                .andExpect(jsonPath("$.telephone",CoreMatchers.is(patientDto3.getTelephone())))
-                .andExpect(jsonPath("$.sexe",CoreMatchers.is(patientDto3.getSexe().name())));
+                .andExpect(jsonPath("$.prenom", CoreMatchers.is(patientDto3.getPrenom())))
+                .andExpect(jsonPath("$.adresse", CoreMatchers.is(patientDto3.getAdresse())))
+                .andExpect(jsonPath("$.telephone", CoreMatchers.is(patientDto3.getTelephone())))
+                .andExpect(jsonPath("$.sexe", CoreMatchers.is(patientDto3.getSexe().name())));
 
 
 
@@ -178,13 +171,14 @@ class PatientControllerTest {
 
     }
 
-    @SneakyThrows
+   // @SneakyThrows
     @Test
-    void deletePatientById() {
+    void deletePatientById() throws Exception {
 
-        doNothing().when(patientService).deletePatient(1L);
+        Long patientId = 1L;
+        doNothing().when(patientService).deletePatient(patientId);
 
-        ResultActions response = mockMvc.perform(delete("/api/v1/patient")
+        ResultActions response = mockMvc.perform(delete("/api/v1/patient/{id}", patientId)
                 .contentType(MediaType.APPLICATION_JSON));
 
         response.andExpect(status().isOk());

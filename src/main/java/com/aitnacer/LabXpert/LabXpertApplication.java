@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LabXpertApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
+
         SpringApplication.run(LabXpertApplication.class, args);
     }
 
