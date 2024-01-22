@@ -1,23 +1,34 @@
 package com.aitnacer.LabXpert.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import com.aitnacer.LabXpert.entity.Test;
+import lombok.*;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- * DTO for {@link com.aitnacer.LabXpert.entity.Test}
+ * DTO for {@link Test}
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TestDto implements Serializable {
     Long id;
+    @NotNull(message = "Name cannot be null")
+    @Size(message = "Name must be between 1 and 255 characters", min = 1, max = 255)
     String nom;
-    TypeAnalyseDto typeAnalyse;
-    float result;
-    TestStandardValueDto testStandardValue;
-    boolean deleted;
+    @NotNull(message = "unit value cannot be null")
+    String unit;
+    @Min(value = 0, message = "Minimum value must be greater than or equal to 0")
+    float minValue;
+    @Min(value = 0, message = "Maximum value must be greater than or equal to 0")
+    float maxValue;
+    Long typeAnalyseId;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
 }

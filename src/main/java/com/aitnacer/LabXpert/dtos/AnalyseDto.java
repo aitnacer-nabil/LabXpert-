@@ -1,28 +1,28 @@
 package com.aitnacer.LabXpert.dtos;
 
-import com.aitnacer.LabXpert.dtos.EchantillonDto;
-import com.aitnacer.LabXpert.dtos.TypeAnalyseDto;
-import com.aitnacer.LabXpert.dtos.UtilisateurDto;
-import com.aitnacer.LabXpert.entity.Analyse;
-import com.aitnacer.LabXpert.entity.AnalyseStatus;
-import lombok.Value;
+import lombok.*;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * DTO for {@link Analyse}
+ * DTO for {@link com.aitnacer.LabXpert.entity.Analyse}
  */
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AnalyseDto implements Serializable {
     Long id;
-    LocalDateTime dateDebut;
-    String Commentaire;
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 1, max = 255, message = "Name must be between 1 and 255 characters")
+    @Column(name = "nom")
     String nom;
-    EchantillonDto echantillon;
-    AnalyseStatus status;
+    LocalDateTime createdAt;
+    LocalDateTime updatedAt;
     List<TypeAnalyseDto> typeAnalyses;
-    UtilisateurDto utilisateur;
-    boolean deleted;
 }

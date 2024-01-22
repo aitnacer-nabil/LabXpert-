@@ -27,8 +27,8 @@ public class UserServiceImpl implements IUserService {
         return  utilisateurs.stream().map(administrateur -> modelMapper.map(administrateur, UtilisateurDto.class)).collect(Collectors.toList());
     }
     public UtilisateurDto getUtilisateurById(Long id)  {
-        Utilisateur administrateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No User fond for this   %s",id), HttpStatus.BAD_REQUEST));
-        return modelMapper.map(administrateur, UtilisateurDto.class);
+        Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No User fond for this   %s",id), HttpStatus.BAD_REQUEST));
+        return modelMapper.map(utilisateur, UtilisateurDto.class);
     }
     public UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto){
         // TODO verification for administrateur
@@ -40,7 +40,7 @@ public class UserServiceImpl implements IUserService {
     }
     public UtilisateurDto updateUtilisateur(Long id , UtilisateurDto administrateurDto){
         //TODO trow exption not found and validation
-        Utilisateur existingdUtilisateur = userRepository.findByIdAndDeletedFalse(id).orElse(null);
+        Utilisateur existingdUtilisateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(() -> new ApiException("user not found with  ", id));
         //TODO validation
         existingdUtilisateur.setPrenom(administrateurDto.getPrenom());
         existingdUtilisateur.setNom(administrateurDto.getNom());

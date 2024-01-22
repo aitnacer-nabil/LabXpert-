@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ExceptionResponse> handleRuntimeExceptions(RuntimeException exception) {
-        // Log data
-        exception.printStackTrace();
-        return handleApiExceptions(new InternalServerErrorException());
-    }
 
 
     @ExceptionHandler(ApiException.class)

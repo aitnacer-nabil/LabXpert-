@@ -1,13 +1,17 @@
 package com.aitnacer.LabXpert.entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "analysis")
+@Table(name = "analysis" ,uniqueConstraints = {@UniqueConstraint(columnNames = "nom", name = "uk_analysis_nom")})
 @Data
 @NoArgsConstructor
 @Builder
@@ -16,28 +20,17 @@ public class Analyse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateDebut;
-    private String Commentaire;
+    @Column(unique = true, nullable = false)
+    @NotNull(message = "Name cannot be null")
+    @Size(min = 1, max = 255, message = "Name must be between 1 and 255 characters")
     private String nom;
-    @ManyToOne
-    private Echantillon echantillon;
-    @Enumerated(EnumType.STRING)
-    private AnalyseStatus status;
-
-    @OneToMany(mappedBy = "analyse",fetch = FetchType.EAGER)
-    private List<TypeAnalyse> typeAnalyses;
-    @OneToOne
-    private Utilisateur utilisateur;
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
-    @Override
-    public String toString() {
-        return "Analyse{" +
-                "id=" + id +
-                ", dateDebut=" + dateDebut +
-                ", Commentaire='" + Commentaire + '\'' +
-                ", nom='" + nom + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
 }

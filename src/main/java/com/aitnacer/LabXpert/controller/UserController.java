@@ -1,7 +1,10 @@
 package com.aitnacer.LabXpert.controller;
 
-import com.aitnacer.LabXpert.dtos.EchantillonView;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonUser;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonView;
 import com.aitnacer.LabXpert.dtos.UtilisateurDto;
+import com.aitnacer.LabXpert.service.IEchantillonService;
 import com.aitnacer.LabXpert.service.impl.UserServiceImpl;
 import com.aitnacer.LabXpert.utils.Constant;
 import com.fasterxml.jackson.annotation.JsonView;
@@ -20,6 +23,7 @@ import java.util.List;
 @Slf4j
 public class UserController {
     final UserServiceImpl userServiceImpl;
+    final IEchantillonService echantillonService;
     @GetMapping
     @JsonView(EchantillonView.FullResponse.class)
     public ResponseEntity<List<UtilisateurDto>> getAllUser(){
@@ -29,6 +33,15 @@ public class UserController {
     public ResponseEntity<UtilisateurDto> getUSerById(@PathVariable(name = "id") Long id) {
         UtilisateurDto utilisateurDto = userServiceImpl.getUtilisateurById(id);
         return ResponseEntity.ok(utilisateurDto);
+    }
+    @GetMapping("/{id}/echantillons")
+    public ResponseEntity<EchantillonUser> getEchantillonsByUserId(@PathVariable(name = "id") Long id) {
+        return ResponseEntity.ok(echantillonService.getEchantillonByUserId(id));
+    }
+    @GetMapping("/{id}/echantillons/{echantillonCode}")
+    public ResponseEntity<EchantillonDto> getEchantillonByUserIdAndCode(@PathVariable(name = "id") Long id, @PathVariable(name = "echantillonCode") String echantillonCode) {
+
+        return ResponseEntity.ok(echantillonService.getEchantillonByUserIdByCode(id,echantillonCode));
     }
 
     @PostMapping

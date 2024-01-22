@@ -22,8 +22,7 @@ public class Utilisateur extends UtilisateurInfo {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole role;
-    @OneToMany(mappedBy = "utilisateur",fetch = FetchType.LAZY)
-    private List<Echantillon> echantillons;
+
     @Builder
     public Utilisateur(Long id, String nom, String prenom, String Adresse, String telephone, EnumSexe sexe, boolean deleted, String userName, String password, UserRole role) {
         super(id, nom, prenom, Adresse, telephone, sexe, deleted);
