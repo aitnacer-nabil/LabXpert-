@@ -24,7 +24,12 @@ public class ApiException extends  RuntimeException implements Supplier<ApiExcep
 
         this.statusCode = status.value();
     }
+    public ApiException(String message) {
+        super( message);
+        this.status = HttpStatus.BAD_REQUEST;
 
+        this.statusCode = status.value();
+    }
     @Override
     public ApiException get() {
         return this;
