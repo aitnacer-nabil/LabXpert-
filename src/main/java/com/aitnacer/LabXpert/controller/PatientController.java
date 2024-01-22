@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,7 +42,7 @@ public class PatientController {
         return ResponseEntity.ok(iEchantillonService.getEchantillonsByPatientIdAndCode(id,echantillonCode));
     }
     @PostMapping
-    public ResponseEntity<PatientDto> createPatient( @RequestBody PatientDto patientDto) {
+    public ResponseEntity<PatientDto> createPatient( @RequestBody @Valid PatientDto patientDto) {
        PatientDto patientDto1 = patientServiveImp.createPatient(patientDto);
         return new ResponseEntity<>(patientDto1, HttpStatus.CREATED);
     }
