@@ -8,7 +8,7 @@ import com.aitnacer.LabXpert.entity.Reactif;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.FournisseurRepository;
 import com.aitnacer.LabXpert.repository.ReactifRepository;
-import com.aitnacer.LabXpert.service.IReactif;
+import com.aitnacer.LabXpert.service.IReactifService;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ReactifServiceImpl implements IReactif {
+public class ReactifServiceImpl implements IReactifService {
 
     ReactifRepository reactifRepository;
     ModelMapper modelMapper;
@@ -32,14 +32,14 @@ public class ReactifServiceImpl implements IReactif {
         Reactif reactif = modelMapper.map(reactifdto, Reactif.class);
         Reactif  saved = reactifRepository.save(reactif);
 
-
-        return modelMapper.map(reactif, ReactifDto.class);
+//TODO verify saved wih fournisseur
+        return modelMapper.map(saved, ReactifDto.class);
     }
 
     @Override
-    public ReactifDto updatedRectif(ReactifDto reactifdto) {
+    public ReactifDto updatedRectif(long id,ReactifDto reactifdto) {
         validate(reactifdto);
-        Reactif reactif = reactifRepository.findByIdReactifAndAndDeletedFalse(reactifdto.getIdReactif()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifdto.getIdReactif()));
+        Reactif reactif = reactifRepository.findByIdReactifAndAndDeletedFalse(id).orElseThrow(() -> new ApiException("Reactif not found with  ", id));
         Fournisseur fournisseur = fournisseurRepository.findByIdFournisseurAndDeletedFalse(reactifdto.getFournisseurIdFournisseur()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifdto.getIdReactif()));
 // Update fields
         reactif.setNom(reactifdto.getNom());
@@ -53,7 +53,7 @@ public class ReactifServiceImpl implements IReactif {
         Reactif updatedReactif = reactifRepository.save(reactif);
 
         // Convert and return the updated ReactifDto
-        return modelMapper.map(reactif, ReactifDto.class);
+        return modelMapper.map(updatedReactif, ReactifDto.class);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 public interface IFournisseurService {
     public FournisseurDTO createFournisseur(FournisseurDTO fournisseurDTO);
     public FournisseurDTO getFournisseurById(Long id);
-    public FournisseurDTO updateFournisseur(FournisseurDTO fournisseurDTO);
-    public Boolean deleteFournisseur(FournisseurDTO fournisseurDTO);
+    public FournisseurDTO updateFournisseur(long id,FournisseurDTO fournisseurDTO);
+    public void deleteFournisseur(long id);
     public List<FournisseurDTO> getAllFournisseur();
 }
