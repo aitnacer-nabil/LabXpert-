@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -36,10 +38,21 @@ public class ApiExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         Map<String, Object> errors = new HashMap<>();
+        String fieldName = extractFieldName(ex.getMessage());
         errors.put("message", "Resource already exists");
+        errors.put("field: ",fieldName);
         errors.put("status", HttpStatus.BAD_REQUEST);
         errors.put("statusCode", HttpStatus.BAD_REQUEST.value() + "");
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+    public String extractFieldName(String message) {
+        Pattern pattern = Pattern.compile("key '(.*?)'");
+        Matcher matcher = pattern.matcher(message);
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return null;
+        }
     }
 
 }

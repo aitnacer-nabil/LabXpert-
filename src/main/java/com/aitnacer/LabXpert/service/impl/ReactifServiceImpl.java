@@ -11,14 +11,17 @@ import com.aitnacer.LabXpert.repository.ReactifRepository;
 import com.aitnacer.LabXpert.service.IReactifService;
 import io.micrometer.common.util.StringUtils;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ReactifServiceImpl implements IReactifService {
 
     ReactifRepository reactifRepository;
@@ -28,8 +31,10 @@ public class ReactifServiceImpl implements IReactifService {
 
     @Override
     public ReactifDto createRecatif(ReactifDto reactifdto) {
-        validate(reactifdto);
+        log.info("Reactif DTo {}",reactifdto);
+                validate(reactifdto);
         Reactif reactif = modelMapper.map(reactifdto, Reactif.class);
+        log.info("Reactif  {}",reactif);
         Reactif  saved = reactifRepository.save(reactif);
 
 //TODO verify saved wih fournisseur

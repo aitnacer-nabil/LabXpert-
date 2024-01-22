@@ -1,5 +1,6 @@
 package com.aitnacer.LabXpert.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class ReactifAnalyseDto implements Serializable {
     String reactifNom;
     String reactifDescription;
     int reactifQuantite;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime reactifDateExpiration;
     Boolean reactifDeleted;
     int quantite;

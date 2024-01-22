@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="fournisseurs")
+@Table(name="fournisseurs", uniqueConstraints = {@UniqueConstraint(name = "nom_unique", columnNames = {"nom"})})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +17,7 @@ public class Fournisseur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFournisseur;
+    @Column(name = "nom",unique = true)
     private String nom;
     private String adresse;
     private String tel;
