@@ -27,14 +27,14 @@ public class AppConfig {
         ModelMapper modelMapper = new ModelMapper();
 
 
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        modelMapper.getConfiguration().setUseOSGiClassLoaderBridging(true);
-        modelMapper.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
-        modelMapper.getConfiguration().setDestinationNameTokenizer(NameTokenizers.UNDERSCORE);
-        // Create a TypeMap with explicit mappings for Echantillon to EchantillonDto
-        TypeMap<Echantillon, EchantillonDto> typeMap = modelMapper.createTypeMap(Echantillon.class, EchantillonDto.class);
-        typeMap.addMapping(src -> src.getPatient().getId(), EchantillonDto::setPatientId);
-        typeMap.addMapping(src -> src.getUtilisateur().getId(), EchantillonDto::setUtilisateurId);
+//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+//        modelMapper.getConfiguration().setUseOSGiClassLoaderBridging(true);
+//        modelMapper.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
+//        modelMapper.getConfiguration().setDestinationNameTokenizer(NameTokenizers.UNDERSCORE);
+//        // Create a TypeMap with explicit mappings for Echantillon to EchantillonDto
+//        TypeMap<Echantillon, EchantillonDto> typeMap = modelMapper.createTypeMap(Echantillon.class, EchantillonDto.class);
+//        typeMap.addMapping(src -> src.getPatient().getId(), EchantillonDto::setPatientId);
+//        typeMap.addMapping(src -> src.getUtilisateur().getId(), EchantillonDto::setUtilisateurId);
 
         return modelMapper;
     }

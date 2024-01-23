@@ -8,6 +8,7 @@ import com.aitnacer.LabXpert.repository.AnalyseRepository;
 import com.aitnacer.LabXpert.repository.TypeAnalyseRepository;
 import com.aitnacer.LabXpert.service.ITypeAnalyseService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class TypeAnalyseServiceImpl implements ITypeAnalyseService {
     private final TypeAnalyseRepository typeAnalyseRepository;
     private final AnalyseRepository analyseRepository;
@@ -40,7 +42,11 @@ public class TypeAnalyseServiceImpl implements ITypeAnalyseService {
     public TypeAnalyseDto createTypeAnalyse( TypeAnalyseDto typeAnalyseDto) {
         validateTypeAnalyseDto(typeAnalyseDto);
         TypeAnalyse typeAnalyse = modelMapper.map(typeAnalyseDto, TypeAnalyse.class);
+        Analyse analyse  = analyseRepository.findByIdAndDeletedFalse(typeAnalyseDto.getAnalyseId()).orElseThrow(() -> new ApiException("Analyse not found with  ", typeAnalyseDto.getAnalyseId()));
+        typeAnalyse.setAnalyse(analyse);
+        log.info("typeInfo {} ",typeAnalyseDto);
         TypeAnalyse savedTypeAnalyse = typeAnalyseRepository.save(typeAnalyse);
+        log.info("typeInfo Saved {} ",typeAnalyseDto);
         return modelMapper.map(savedTypeAnalyse, TypeAnalyseDto.class);
     }
 
