@@ -28,14 +28,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(FournisseurController.class)
 class FournisseurControllerTest {
@@ -106,7 +107,7 @@ class FournisseurControllerTest {
                 .tel("1234567")
                 .build();
 
-        given(fournisseurService.createFournisseur(ArgumentMatchers.any()))
+        given(fournisseurService.createFournisseur(any()))
                 .willAnswer((invocation)-> invocation.getArgument(0));
         ResultActions responce= mockMvc.perform(post("/api/v1/fournisseur").
                 contentType(MediaType.APPLICATION_JSON)
@@ -122,23 +123,31 @@ class FournisseurControllerTest {
 
     @Test
     void updateFournisseur() throws Exception {
-        FournisseurDTO fournisseurDTO = FournisseurDTO.builder()
-                .idFournisseur(1L)
-                .nom("salma")
-                .adresse("casa")
-                .tel("1234567")
-                .build();
-        Long patientid = 1L;
-        when(fournisseurService.updateFournisseur(patientid,fournisseurDTO)).thenReturn(fournisseurDTO);
+// Arrange
+        Long id = 2L;
+        String nom = "Fournisseur5";
+        String adresse = "Avenue Moulay Rachid";
+        String tel = "+212699001122";
 
-        ResultActions response = mockMvc.perform(put("/api/v1/patient/{id}", patientid)
+        FournisseurDTO fournisseurDTO = new FournisseurDTO();
+        fournisseurDTO.setNom(nom);
+        fournisseurDTO.setAdresse(adresse);
+        fournisseurDTO.setTel(tel);
+
+        FournisseurDTO updatedFournisseur = new FournisseurDTO();
+        updatedFournisseur.setIdFournisseur(id);
+        updatedFournisseur.setNom(nom);
+        updatedFournisseur.setAdresse(adresse);
+        updatedFournisseur.setTel(tel);
+
+        when(fournisseurService.updateFournisseur(eq(id), any(FournisseurDTO.class))).thenReturn(updatedFournisseur);
+
+        // Act & Assert
+        mockMvc.perform(put("/api/v1/fournisseur/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                .contentType(objectMapper.writeValueAsString(fournisseurDTO)))
+                        .content(new ObjectMapper().writeValueAsString(fournisseurDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nom", CoreMatchers.is(fournisseurDTO.getNom())))
-
-                .andExpect(jsonPath("$.adresse", CoreMatchers.is(fournisseurDTO.getAdresse())))
-                .andExpect(jsonPath("$.tel", CoreMatchers.is(fournisseurDTO.getTel())));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(updatedFournisseur)));
 
 
     }
