@@ -33,10 +33,10 @@ public class SimpleAnalyse {
     @ManyToOne
     private Analyse analyse;
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "simple_analyse_created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "simple_analyse_updated_at")
     private LocalDateTime updatedAt;
     @OneToMany
     private List<Result> results= new ArrayList<>();

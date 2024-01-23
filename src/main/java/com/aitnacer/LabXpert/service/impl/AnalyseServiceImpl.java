@@ -8,6 +8,8 @@ import com.aitnacer.LabXpert.service.IAnalyseService;
 import com.aitnacer.LabXpert.utils.EntityExistenceChecker;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@ComponentScan
 @AllArgsConstructor
 public class AnalyseServiceImpl implements IAnalyseService, EntityExistenceChecker<Analyse> {
     private final AnalyseRepository analyseRepository;
