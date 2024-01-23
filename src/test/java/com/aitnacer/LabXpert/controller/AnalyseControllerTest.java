@@ -26,14 +26,16 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @WebMvcTest(AnalyseController.class)
 class AnalyseControllerTest {
     @Autowired
@@ -46,20 +48,23 @@ class AnalyseControllerTest {
     private ITestService testService;
     @Autowired
     private ObjectMapper objectMapper;
+
     @Test
     void getAllAnalyse() throws Exception {
-        AnalyseDto analyseDto=AnalyseDto.builder()
+        AnalyseDto analyseDto = AnalyseDto.builder()
                 .id(1L)
                 .nom("salma")
                 .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
-        AnalyseDto analyseDto1=AnalyseDto.builder()
+        AnalyseDto analyseDto1 = AnalyseDto.builder()
                 .id(1L)
                 .nom("salma")
                 .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
-        List<AnalyseDto> analyseDtos= Arrays.asList(analyseDto, analyseDto1);
+        List<AnalyseDto> analyseDtos = Arrays.asList(analyseDto, analyseDto1);
 
         when(analyseService.getAllAnalyses()).thenReturn(analyseDtos);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/analyse")
@@ -75,13 +80,11 @@ class AnalyseControllerTest {
         Assertions.assertNotNull(response);
 
 
-
-
     }
 
     @Test
     void getAnalyseById() throws Exception {
-        AnalyseDto analyseDto=AnalyseDto.builder()
+        AnalyseDto analyseDto = AnalyseDto.builder()
                 .id(1L)
                 .nom("salma")
                 .createdAt(LocalDateTime.now())
@@ -102,17 +105,17 @@ class AnalyseControllerTest {
     void createAnalyse() throws Exception {
         //given
 
-        AnalyseDto analyseDto=AnalyseDto.builder()
+        AnalyseDto analyseDto = AnalyseDto.builder()
                 .id(1L)
                 .nom("salma")
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        given(analyseService.createAnalyse(ArgumentMatchers.any()))
-                .willAnswer((invocation)-> invocation.getArgument(0));
+        given(analyseService.createAnalyse(any()))
+                .willAnswer((invocation) -> invocation.getArgument(0));
 
         //when
-        ResultActions responce= mockMvc.perform(post("/api/v1/analyse").
+        ResultActions responce = mockMvc.perform(post("/api/v1/analyse").
                 contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(analyseDto))
         );
@@ -126,25 +129,24 @@ class AnalyseControllerTest {
 
     @Test
     void updateAnalyse() throws Exception {
-        AnalyseDto analyseDto=AnalyseDto.builder()
-                .id(1L)
-                .nom("salma")
-                .createdAt(LocalDateTime.now())
-                .build();
+
         Long id = 1L;
-        when(analyseService.updateAnalyse(id,analyseDto)).thenReturn(analyseDto);
+        String nom = "Complete Blood Count";
+        AnalyseDto analyseDto = new AnalyseDto();
+        analyseDto.setNom(nom);
 
-        ResultActions response = mockMvc.perform(put("/api/v1/analyse/{id}", id)
+        AnalyseDto updatedAnalyse = new AnalyseDto();
+        updatedAnalyse.setId(id);
+        updatedAnalyse.setNom(nom);
+
+        when(analyseService.updateAnalyse(eq(id), any(AnalyseDto.class))).thenReturn(updatedAnalyse);
+
+        // Act & Assert
+        mockMvc.perform(put("/api/v1/analyse/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(analyseDto)))
+                        .content(new ObjectMapper().writeValueAsString(analyseDto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nom", CoreMatchers.is(analyseDto.getNom())));
-
-
-
-
-
-
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(updatedAnalyse)));
     }
 
     // @SneakyThrows
@@ -159,6 +161,6 @@ class AnalyseControllerTest {
 
         response.andExpect(status().isOk());
     }
-    }
+}
 
 

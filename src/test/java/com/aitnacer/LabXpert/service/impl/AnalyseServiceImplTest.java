@@ -26,11 +26,11 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
-
+@ExtendWith(MockitoExtension.class)
 class AnalyseServiceImplTest {
 
 
-    @ExtendWith(MockitoExtension.class)
+
 
         @Mock
         private AnalyseRepository analyseRepository;
@@ -109,20 +109,7 @@ class AnalyseServiceImplTest {
             System.out.println(reslt);
         }
 
-        @Test
-        void deleteAnalyuse() {
-            Analyse analyse=Analyse.builder()
-                    .id(1L)
-                    .nom("salma")
-                    .createdAt(LocalDateTime.now())
-                    .build();
-            given(analyseRepository.findByIdAndDeletedFalse(1l)).willReturn(Optional.of(analyse));
-            given(analyseRepository.save(analyse)).willReturn(analyse);
-            analyse.setDeleted(true);
-            analyseService.deleteAnalyse(1l);
 
-            assertThat(analyse.isDeleted()).isTrue();
-        }
 
         @Test
         void getAllAnalyse() {

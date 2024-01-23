@@ -78,6 +78,7 @@ public class AnalyseController {
     @PutMapping("/{id}")
     public ResponseEntity<AnalyseDto> updateAnalyse(@PathVariable Long id, @Valid @RequestBody AnalyseDto analyseDto) {
         AnalyseDto updatedAnalyse = analyseService.updateAnalyse(id, analyseDto);
+        log.info("up");
         return new ResponseEntity<>(updatedAnalyse, HttpStatus.OK);
     }
 
