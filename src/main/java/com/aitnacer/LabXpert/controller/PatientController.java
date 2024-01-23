@@ -12,7 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"patient")
@@ -50,10 +52,13 @@ public class PatientController {
     public ResponseEntity<PatientDto> updatePatient(@PathVariable("id") Long id,  @RequestBody PatientDto patientDto)  {
         return ResponseEntity.ok(patientServiveImp.updatePatient(id, patientDto));
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePatientById(@PathVariable("id") Long id)  {
-        patientServiveImp.deletePatient(id);
-        return ResponseEntity.ok("Patient with id: " + id + " has been deleted successfully!");
-    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
+        Map<String, Object> response = new HashMap<>();
+        patientServiveImp.deletePatient(id);
+        response.put("success", true);
+        response.put("message", "Analyse with id: " + id + " has been deleted successfully!");
+        return ResponseEntity.ok(response);
+    }
     }

@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.dtos.scheduling;
 
 import com.aitnacer.LabXpert.entity.AnalyseStatus;
+import com.aitnacer.LabXpert.entity.Reactif;
 import com.aitnacer.LabXpert.entity.Result;
 import lombok.*;
 

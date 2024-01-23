@@ -1,6 +1,6 @@
 package com.aitnacer.LabXpert.service;
 
-import com.aitnacer.LabXpert.dtos.ReactifDto;
+import com.aitnacer.LabXpert.dtos.reactif.ReactifDto;
 
 import java.util.List;
 

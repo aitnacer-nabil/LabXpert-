@@ -12,7 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"type-analyse")
 @AllArgsConstructor
@@ -46,9 +49,13 @@ public class TypeAnalyseController {
         return ResponseEntity.ok(updatedTypeAnalyse);
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTypeAnalyse(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
+        Map<String, Object> response = new HashMap<>();
         typeAnalyseService.deleteTypeAnalyse(id);
-        return ResponseEntity.noContent().build();
+        response.put("success", true);
+        response.put("message", "TypeAnalyse with id: " + id + " has been deleted successfully!");
+        return ResponseEntity.ok(response);
     }
 }

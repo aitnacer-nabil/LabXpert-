@@ -2,7 +2,7 @@ package com.aitnacer.LabXpert.service.impl;
 
 
 
-import com.aitnacer.LabXpert.dtos.ReactifDto;
+import com.aitnacer.LabXpert.dtos.reactif.ReactifDto;
 import com.aitnacer.LabXpert.entity.Fournisseur;
 import com.aitnacer.LabXpert.entity.Reactif;
 import com.aitnacer.LabXpert.exception.common.ApiException;
@@ -15,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,16 +42,29 @@ public class ReactifServiceImpl implements IReactifService {
 
     @Override
     public ReactifDto updatedRectif(long id,ReactifDto reactifdto) {
-        validate(reactifdto);
+
         Reactif reactif = reactifRepository.findByIdReactifAndAndDeletedFalse(id).orElseThrow(() -> new ApiException("Reactif not found with  ", id));
-        Fournisseur fournisseur = fournisseurRepository.findByIdFournisseurAndDeletedFalse(reactifdto.getFournisseurIdFournisseur()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifdto.getIdReactif()));
+        if (reactifdto.getFournisseurIdFournisseur() != reactif.getFournisseur().getIdFournisseur()){
+            Fournisseur fournisseur = fournisseurRepository.findByIdFournisseurAndDeletedFalse(reactifdto.getFournisseurIdFournisseur()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifdto.getIdReactif()));
+            reactif.setFournisseur(fournisseur);
+        }
 // Update fields
-        reactif.setNom(reactifdto.getNom());
-        reactif.setDescription(reactifdto.getDescription());
-        reactif.setQuantite(reactifdto.getQuantite());
-        reactif.setDateExpiration(reactifdto.getDateExpiration());
-        reactif.setFournisseur(fournisseur);
-        reactif.setDeleted(reactifdto.getDeleted());
+        if( reactifdto.getQuantite() > 0){
+           reactif.addQte(reactifdto.getQuantite());
+        }
+        if (reactifdto.getNom() != null &&  !reactifdto.getNom().isEmpty()){
+            reactif.setNom(reactifdto.getNom());
+        }
+        if (reactifdto.getDescription() != null &&!reactifdto.getDescription().isEmpty()){
+            reactif.setNom(reactifdto.getDescription());
+        }
+        if(reactifdto.getDateExpiration() != null && !reactifdto.getDateExpiration().isEqual(reactif.getDateExpiration())){
+            reactif.setDateExpiration(reactifdto.getDateExpiration());
+        }
+        if(reactifdto.isDeleted()){
+            reactif.setDeleted(reactifdto.isDeleted());
+        }
+
 
         // Save the updated Reactif
         Reactif updatedReactif = reactifRepository.save(reactif);
@@ -107,6 +119,7 @@ public class ReactifServiceImpl implements IReactifService {
 
         // Additional validation for specific types if needed
         if (value instanceof Integer && ((Integer) value) <= 0) {
+            log.info("value {}",value);
             throw new ApiException(fieldName + " should be a positive integer");
         }
 

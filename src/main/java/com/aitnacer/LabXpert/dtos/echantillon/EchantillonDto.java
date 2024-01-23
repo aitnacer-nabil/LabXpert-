@@ -1,11 +1,13 @@
 package com.aitnacer.LabXpert.dtos.echantillon;
 
+import com.aitnacer.LabXpert.dtos.ReactifAnalyseDto;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * DTO for {@link com.aitnacer.LabXpert.entity.Echantillon}
@@ -33,4 +35,5 @@ public class EchantillonDto implements Serializable {
     boolean assigned;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+    List<ReactifAnalyseDto> reactifAnalyses;
 }

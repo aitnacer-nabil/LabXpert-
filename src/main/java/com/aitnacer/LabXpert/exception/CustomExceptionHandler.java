@@ -1,6 +1,6 @@
 package com.aitnacer.LabXpert.exception;
 
-import com.aitnacer.LabXpert.dtos.ExceptionResponse;
+import com.aitnacer.LabXpert.dtos.ExceptionResponseDto;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.exception.utils.ApiExceptionParser;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ public class CustomExceptionHandler {
 
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<ExceptionResponse>  handleApiExceptions(ApiException apiExceptionHandler){
-        ExceptionResponse exceptionResponse = ApiExceptionParser.parseException(apiExceptionHandler);
+    public ResponseEntity<ExceptionResponseDto>  handleApiExceptions(ApiException apiExceptionHandler){
+        ExceptionResponseDto exceptionResponseDto = ApiExceptionParser.parseException(apiExceptionHandler);
 
-        return ResponseEntity.status(exceptionResponse.getStatus())
-                .body(exceptionResponse);
+        return ResponseEntity.status(exceptionResponseDto.getStatus())
+                .body(exceptionResponseDto);
     }
 }

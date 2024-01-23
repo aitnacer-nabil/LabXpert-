@@ -35,13 +35,7 @@ public class AppConfig {
 
     //This configuration will tell Jackson to serialize LocalDateTime
     // instances into strings in the format yyyy-MM-dd'T'HH:mm:ss.
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
-        return builder -> {
-            builder.simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            builder.serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")));
-        };
-    }
+
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();

@@ -15,7 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"user")
@@ -55,9 +57,13 @@ public class UserController {
         return ResponseEntity.ok(userServiceImpl.updateUtilisateur(id, userDTO));
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable("id") Long id)  {
-            userServiceImpl.deleteUtilisateur(id);
-        return ResponseEntity.ok("User with id: " + id + " has been deleted successfully!");
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
+        Map<String, Object> response = new HashMap<>();
+        userServiceImpl.deleteUtilisateur(id);
+        response.put("success", true);
+        response.put("message", "User with id: " + id + " has been deleted successfully!");
+        return ResponseEntity.ok(response);
     }
 }

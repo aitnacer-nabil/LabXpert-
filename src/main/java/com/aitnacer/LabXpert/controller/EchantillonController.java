@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"echantillons")
@@ -43,9 +45,13 @@ public class EchantillonController {
         return ResponseEntity.ok(updatedEchantillon);
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEchantillon(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
+        Map<String, Object> response = new HashMap<>();
         echantillonService.deleteEchantillon(id);
-        return ResponseEntity.noContent().build();
+        response.put("success", true);
+        response.put("message", "Echantillon with id: " + id + " has been deleted successfully!");
+        return ResponseEntity.ok(response);
     }
 }

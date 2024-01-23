@@ -40,4 +40,6 @@ public class SimpleAnalyse {
     private LocalDateTime updatedAt;
     @OneToMany
     private List<Result> results= new ArrayList<>();
+    @OneToMany
+    private List<Reactif> reactifs  = new ArrayList<>();
 }
