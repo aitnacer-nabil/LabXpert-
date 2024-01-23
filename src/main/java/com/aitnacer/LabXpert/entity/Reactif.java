@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.entity;
 
 import com.aitnacer.LabXpert.exception.common.ApiException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Reactif {
     private String nom;
     private String description;
     private int quantite;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateExpiration;
     @ManyToOne
     private Fournisseur fournisseur;

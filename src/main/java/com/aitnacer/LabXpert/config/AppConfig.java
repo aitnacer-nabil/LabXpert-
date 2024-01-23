@@ -9,6 +9,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
+import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.convention.NameTokenizers;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +27,10 @@ public class AppConfig {
         ModelMapper modelMapper = new ModelMapper();
 
 
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.getConfiguration().setUseOSGiClassLoaderBridging(true);
+        modelMapper.getConfiguration().setSourceNameTokenizer(NameTokenizers.UNDERSCORE);
+        modelMapper.getConfiguration().setDestinationNameTokenizer(NameTokenizers.UNDERSCORE);
         // Create a TypeMap with explicit mappings for Echantillon to EchantillonDto
         TypeMap<Echantillon, EchantillonDto> typeMap = modelMapper.createTypeMap(Echantillon.class, EchantillonDto.class);
         typeMap.addMapping(src -> src.getPatient().getId(), EchantillonDto::setPatientId);
