@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Constant.BASE_API_URL +"test")
@@ -42,10 +44,6 @@ public class TestController {
         return new ResponseEntity<>(updatedTest, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTest(@PathVariable Long id) {
-        //TODO do something for delete
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+  //TODO if i want to delte test
 
 }

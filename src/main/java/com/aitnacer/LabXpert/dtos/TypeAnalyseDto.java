@@ -1,5 +1,6 @@
 package com.aitnacer.LabXpert.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,9 @@ public class TypeAnalyseDto implements Serializable {
     String nom;
     @NotNull(message = "Analyse ID cannot be null")
     Long analyseId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime updatedAt;
     List<TestDto> tests;
 }

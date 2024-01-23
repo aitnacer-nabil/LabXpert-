@@ -3,6 +3,7 @@ package com.aitnacer.LabXpert.dtos;
 import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
 import com.aitnacer.LabXpert.dtos.result.ResultDto;
 import com.aitnacer.LabXpert.entity.AnalyseStatus;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.io.Serializable;
@@ -24,7 +25,9 @@ public class SimpleAnalyseDto implements Serializable {
     UtilisateurDto utilisateur;
     EchantillonDto echantillon;
     AnalyseDto analyse;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime updatedAt;
     List<ResultDto> results;
 }

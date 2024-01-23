@@ -36,6 +36,8 @@ public class Echantillon {
     @UpdateTimestamp
     @Column(name = "echantillons_updated_at")
     private LocalDateTime updatedAt;
+    @OneToMany
+    private List<ReactifAnalyse> reactifAnalyses = new ArrayList<>();
 
 
 

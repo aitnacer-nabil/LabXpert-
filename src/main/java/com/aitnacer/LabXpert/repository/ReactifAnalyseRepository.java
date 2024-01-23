@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReactifAnalyseRepository extends JpaRepository<ReactifAnalyse,Long> {
-    List<ReactifAnalyse> findBy();
+
     Optional<ReactifAnalyse> findById(Long id);
 }

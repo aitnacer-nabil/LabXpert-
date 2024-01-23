@@ -1,17 +1,20 @@
 package com.aitnacer.LabXpert.entity;
 
+import com.aitnacer.LabXpert.exception.common.ApiException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
 @Table(name="reactifsanalyses")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Builder
 public class ReactifAnalyse {
     @Id
@@ -19,6 +22,9 @@ public class ReactifAnalyse {
     private Long id;
     @ManyToOne
     private Reactif reactif;
+
     private int quantite;
+
+
 
 }

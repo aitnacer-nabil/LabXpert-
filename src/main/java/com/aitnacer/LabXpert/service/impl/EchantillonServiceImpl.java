@@ -4,13 +4,10 @@ import com.aitnacer.LabXpert.dtos.echantillon.*;
 import com.aitnacer.LabXpert.dtos.patient.PatientDto;
 import com.aitnacer.LabXpert.dtos.patient.PatientEchantillonDto;
 import com.aitnacer.LabXpert.dtos.patient.PatientIdDto;
-import com.aitnacer.LabXpert.entity.Echantillon;
-import com.aitnacer.LabXpert.entity.Patient;
-import com.aitnacer.LabXpert.entity.Utilisateur;
+import com.aitnacer.LabXpert.dtos.reactif.ReactifAnalyseDto;
+import com.aitnacer.LabXpert.entity.*;
 import com.aitnacer.LabXpert.exception.common.ApiException;
-import com.aitnacer.LabXpert.repository.EchantillonRepository;
-import com.aitnacer.LabXpert.repository.PatientRepository;
-import com.aitnacer.LabXpert.repository.UserRepository;
+import com.aitnacer.LabXpert.repository.*;
 import com.aitnacer.LabXpert.service.IEchantillonService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +27,8 @@ public class EchantillonServiceImpl implements IEchantillonService {
     private final UserRepository userRepository;
     private final PatientRepository patientRepository;
     private final ModelMapper modelMapper;
+    private final ReactifRepository reactifRepository;
+    private final ReactifAnalyseRepository reactifAnalyseRepository;
 
 
     @Override
@@ -51,13 +50,28 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
     @Override
     public EchantillonDto createEchantillon(EchantillonRequestDto echantillonRequestDto) {
-        log.info("Echantiollon DTO", echantillonRequestDto);
-        System.out.println(echantillonRequestDto);
+        log.info("Echantillon DTO {}", echantillonRequestDto);
+
+        List<ReactifAnalyse> reactifAnalyses = echantillonRequestDto.getReactifAnalyses().stream().map(reactifAnalyseDto -> {
+            Reactif reactif = reactifRepository.findByIdReactifAndAndDeletedFalse(reactifAnalyseDto.getReactifIdReactif()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifAnalyseDto.getReactifIdReactif()));
+            reactif.subQte(reactifAnalyseDto.getQuantite());
+           Reactif reactifSaved = reactifRepository.save(reactif);
+            ReactifAnalyse reactifAnalyse = ReactifAnalyse.builder().reactif(reactifSaved).quantite(reactifAnalyseDto.getQuantite()).build();
+          //  reactifAnalyseDto1.setReactifIdReactif(reactif.getIdReactif());
+            log.info("Stream reactifAnalyseDto {} ",reactifAnalyseDto);
+            return reactifAnalyseRepository.save(reactifAnalyse) ;
+        }).collect(Collectors.toList());
         Echantillon echantillon = modelMapper.map(echantillonRequestDto, Echantillon.class);
-        System.out.println(echantillon);
+        Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(echantillonRequestDto.getUtilisateurId()).orElseThrow(() -> new ApiException("utilisateur not found with  ", echantillonRequestDto.getUtilisateurId()));
+        Patient patient = patientRepository.findByIdAndDeletedFalse(echantillonRequestDto.getPatientId()).orElseThrow(() -> new ApiException("patient not found with  ", echantillonRequestDto.getPatientId()));
+
         echantillon.setEchantillonCode(generateCode());
+        echantillon.setUtilisateur(utilisateur);
+        echantillon.setPatient(patient);
+        echantillon.setReactifAnalyses(reactifAnalyses);
+
         Echantillon echantillonSaved = echantillonRepository.save(echantillon);
-//TODO Unable to find com.aitnacer.LabXpert.entity.Utilisateur with id 3
+
         return modelMapper.map(echantillonSaved, EchantillonDto.class);
     }
 
@@ -98,7 +112,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
     @Override
     public EchantillonDto getEchantillonsByPatientIdAndCode(long patientId, String echantillonCode) {
         Patient patient = patientRepository.findByIdAndDeletedFalse(patientId).orElseThrow(() -> new ApiException("Patient not found with  ", patientId));
-        Echantillon echantillon = echantillonRepository.findByPatient_IdAndDeletedFalseAndEchantillonCode(patientId, echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :"+echantillonCode, HttpStatus.BAD_REQUEST ));
+        Echantillon echantillon = echantillonRepository.findByPatient_IdAndDeletedFalseAndEchantillonCode(patientId, echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :" + echantillonCode, HttpStatus.BAD_REQUEST));
         return modelMapper.map(echantillon, EchantillonDto.class);
     }
 
@@ -113,7 +127,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
     @Override
     public EchantillonDto getEchantillonByUserIdByCode(long userId, String echantillonCode) {
         userRepository.findByIdAndDeletedFalse(userId).orElseThrow(() -> new ApiException("utilisateur not found with  ", userId));
-        Echantillon echantillon =echantillonRepository.findByUtilisateur_IdAndDeletedFalseAndEchantillonCode(userId,echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :"+echantillonCode, HttpStatus.BAD_REQUEST ));
+        Echantillon echantillon = echantillonRepository.findByUtilisateur_IdAndDeletedFalseAndEchantillonCode(userId, echantillonCode).orElseThrow(() -> new ApiException("echantillon not found with Code :" + echantillonCode, HttpStatus.BAD_REQUEST));
         return modelMapper.map(echantillon, EchantillonDto.class);
     }
 
