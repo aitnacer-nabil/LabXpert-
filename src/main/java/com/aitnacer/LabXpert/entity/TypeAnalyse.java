@@ -29,10 +29,10 @@ public class TypeAnalyse {
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "type_analyse_created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "type_analyse_updated_at")
     private LocalDateTime updatedAt;
 
 }

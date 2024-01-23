@@ -246,19 +246,5 @@ class EchantillonServiceImplTest {
         assertThat(echantillon1.isDeleted()).isTrue();
     }
 
-    @Test
-    void getEchantillonsByPatientId() {
-    }
 
-    @Test
-    void getEchantillonsByPatientIdAndCode() {
-    }
-
-    @Test
-    void getEchantillonByUserId() {
-    }
-
-    @Test
-    void getEchantillonByUserIdByCode() {
-    }
 }
