@@ -26,7 +26,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -79,23 +81,39 @@ class UserServiceImplTest {
 
     @Test
     void getUtilisateurById() {
-        Utilisateur user1 = Utilisateur.builder()
-                .id(1l)
-                .nom("John")
-                .prenom("Doe")
-                .Adresse("123 Main St")
-                .telephone("123456789")
-                .sexe(EnumSexe.MALE)
-                .deleted(false)
-                .userName("john.doe")
-                .password("password123")
-                .role(UserRole.TECHNICIEN)
-                .build();
-        given(userRepository.findByIdAndDeletedFalse(1l)).willReturn(Optional.of(user1));
-        UtilisateurDto utilisateurDto = userService.getUtilisateurById(1l);
-        assertThat(utilisateurDto).isNotNull();
-        AssertionsForClassTypes.assertThat(utilisateurDto.getId()).isEqualTo(1);
-        System.out.println(utilisateurDto);
+        // Arrange
+        Long id = 1L;
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setId(id);
+        utilisateur.setNom("John");
+        utilisateur.setPrenom("Doe");
+        utilisateur.setAdresse("123 Main St");
+        utilisateur.setTelephone("1234567890");
+        utilisateur.setSexe(EnumSexe.MALE);
+        utilisateur.setDeleted(false);
+        utilisateur.setUserName("johndoe");
+        utilisateur.setPassword("password");
+        utilisateur.setRole(UserRole.RESPONSABLE);
+
+        UtilisateurDto utilisateurDto = new UtilisateurDto();
+        utilisateurDto.setId(id);
+        utilisateurDto.setNom("John");
+        utilisateurDto.setPrenom("Doe");
+        utilisateurDto.setAdresse("123 Main St");
+        utilisateurDto.setTelephone("1234567890");
+        utilisateurDto.setSexe(EnumSexe.MALE);
+        utilisateurDto.setDeleted(false);
+        utilisateurDto.setUserName("johndoe");
+        utilisateurDto.setPassword("password");
+        utilisateurDto.setRole(UserRole.RESPONSABLE);
+
+        when(userRepository.findByIdAndDeletedFalse(id)).thenReturn(Optional.of(utilisateur));
+
+        // Act
+        UtilisateurDto result = userService.getUtilisateurById(id);
+
+        // Assert
+        assertEquals(utilisateurDto, result);
 
     }
 
