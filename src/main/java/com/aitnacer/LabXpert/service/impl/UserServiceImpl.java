@@ -6,6 +6,7 @@ import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.repository.UserRepository;
 import com.aitnacer.LabXpert.service.IUserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
@@ -51,6 +53,7 @@ public class UserServiceImpl implements IUserService {
         existingdUtilisateur.setSexe(administrateurDto.getSexe());
         Utilisateur updatedUtilisateur = userRepository.save(existingdUtilisateur);
         updatedUtilisateur.setId(id);
+        log.info("utilisateur {} ",updatedUtilisateur);
         return modelMapper.map(updatedUtilisateur, UtilisateurDto.class);
     }
     public void deleteUtilisateur(Long id){

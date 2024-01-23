@@ -73,8 +73,6 @@ class AnalyseControllerTest {
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].nom").value("salma"))
-
-
                 .andReturn();
         String response = mvcResult.getResponse().getContentAsString();
         Assertions.assertNotNull(response);

@@ -27,7 +27,6 @@ public class UserController {
     final UserServiceImpl userServiceImpl;
     final IEchantillonService echantillonService;
     @GetMapping
-    @JsonView(EchantillonView.FullResponse.class)
     public ResponseEntity<List<UtilisateurDto>> getAllUser(){
         return ResponseEntity.ok(userServiceImpl.getAllUtilisateur());
     }

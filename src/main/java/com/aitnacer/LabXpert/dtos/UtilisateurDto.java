@@ -26,7 +26,6 @@ public class UtilisateurDto implements Serializable {
     @NotNull(message = "The adress should not be null!")
     String Adresse;
     @NotNull(message = "The telephone should not be null!")
-    @Min(10) @Max(10)
     String telephone;
     @NotNull
     EnumSexe sexe;

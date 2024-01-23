@@ -26,6 +26,11 @@ import org.springframework.mock.web.MockMultipartHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -50,34 +55,22 @@ class UserControllerTest {
     @Test
     @DisplayName("Given UtilisatorTod Object when create Utilisateur then return Saved utilisateur")
     void getAllUser() throws Exception {
-//        Utilisateur utilisateur1 = Utilisateur.builder()
-//                .nom("nabil")
-//                .prenom("ait nacer")
-//                .sexe(EnumSexe.MALE)
-//                .role(UserRole.RESPONSABLE)
-//                .Adresse("hello")
-//                .userName("nabil")
-//                .telephone("0612341256")
-//                .password("12345")
-//                .build();
-//        given(userService.createUtilisateur(ArgumentMatchers.any(UtilisateurDto.class)))
-//                .willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
-//        ResultActions response = mockMvc.perform(post(Constant.BASE_API_URL + "user")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(objectMapper.writeValueAsString(utilisateur1))
-//        );
-//        response.andExpect(status().isCreated())
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(jsonPath("$.nom", CoreMatchers.is(utilisateur1.getNom())))
-//                .andExpect(jsonPath("$.prenom", CoreMatchers.is(utilisateur1.getPrenom())))
-//                .andExpect(jsonPath("$.sexe", CoreMatchers.is(utilisateur1.getSexe().name())))
-//                .andExpect(jsonPath("$.role", CoreMatchers.is(utilisateur1.getRole().name())))
-//                .andExpect(jsonPath("$.adresse", CoreMatchers.is(utilisateur1.getAdresse())))
-//                .andExpect(jsonPath("$.userName", CoreMatchers.is(utilisateur1.getUserName())))
-//                .andExpect(jsonPath("$.telephone", CoreMatchers.is(utilisateur1.getTelephone())));
 
+        UtilisateurDto utilisateurDto1 = new UtilisateurDto();
+        utilisateurDto1.setNom("User1");
+        UtilisateurDto utilisateurDto2 = new UtilisateurDto();
+        utilisateurDto2.setNom("User2");
 
+        List<UtilisateurDto> utilisateurs = Arrays.asList(utilisateurDto1, utilisateurDto2);
+
+        when(userService.getAllUtilisateur()).thenReturn(utilisateurs);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/v1/user"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(utilisateurs)));
     }
+
     @Test
     void getUserById() throws Exception {
 
@@ -123,7 +116,7 @@ class UserControllerTest {
                 .password("12345")
                 .build();
 
-        given(userService.createUtilisateur(ArgumentMatchers.any()))
+        given(userService.createUtilisateur(any()))
                 .willAnswer((invocation)-> invocation.getArgument(0));
 
         //when
@@ -144,33 +137,40 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.telephone", CoreMatchers.is(utilisateurDto.getTelephone())));
     }
     @Test
-    void updatePatient() throws Exception {
-        UtilisateurDto utilisateurDto = UtilisateurDto.builder()
-                .nom("nabil")
-                .prenom("ait nacer")
-                .sexe(EnumSexe.MALE)
-                .role(UserRole.RESPONSABLE)
-                .Adresse("hello")
-                .userName("nabil")
-                .telephone("0612341256")
-                .password("12345")
-                .build();
+    void updateUser() throws Exception {
+// Arrange
+        // Arrange
         Long id = 1L;
-        when(userService.updateUtilisateur(id,utilisateurDto)).thenReturn(utilisateurDto);
+        UtilisateurDto userDTO = new UtilisateurDto();
+        userDTO.setNom("John");
+        userDTO.setPrenom("Doe");
+        userDTO.setAdresse("123 Main St");
+        userDTO.setTelephone("1234567890");
+        userDTO.setSexe(EnumSexe.MALE);
+        userDTO.setDeleted(false);
+        userDTO.setUserName("johndoe");
+        userDTO.setPassword("password");
+        userDTO.setRole(UserRole.RESPONSABLE);
 
-        ResultActions response = mockMvc.perform(put("/api/v1/user/{id}", id)
+        UtilisateurDto updatedUser = new UtilisateurDto();
+        updatedUser.setId(id);
+        updatedUser.setNom(userDTO.getNom());
+        updatedUser.setPrenom(userDTO.getPrenom());
+        updatedUser.setAdresse(userDTO.getAdresse());
+        updatedUser.setTelephone(userDTO.getTelephone());
+        updatedUser.setSexe(userDTO.getSexe());
+        updatedUser.setRole(userDTO.getRole());
+        updatedUser.setUserName(userDTO.getUserName());
+        updatedUser.setPassword(userDTO.getPassword());
+
+        when(userService.updateUtilisateur(eq(id), any(UtilisateurDto.class))).thenReturn(updatedUser);
+
+        // Act & Assert
+        mockMvc.perform(put("/api/v1/user/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(utilisateurDto)))
+                        .content(new ObjectMapper().writeValueAsString(userDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nom", CoreMatchers.is(utilisateurDto.getNom())))
-                .andExpect(jsonPath("$.prenom", CoreMatchers.is(utilisateurDto.getPrenom())))
-                .andExpect(jsonPath("$.adresse", CoreMatchers.is(utilisateurDto.getAdresse())))
-                .andExpect(jsonPath("$.telephone", CoreMatchers.is(utilisateurDto.getTelephone())))
-                .andExpect(jsonPath("$.sexe", CoreMatchers.is(utilisateurDto.getSexe().name())));
-
-
-
-
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(updatedUser)));
 
     }
     @Test

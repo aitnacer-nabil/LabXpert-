@@ -33,7 +33,6 @@ public abstract class UtilisateurInfo {
     @NotEmpty
     private String Adresse;
     @NotNull(message = "The prenom should not be null!")
-    @Size(min = 10,max = 10)
     @NotEmpty
     private String telephone;
     @Enumerated(EnumType.STRING)
