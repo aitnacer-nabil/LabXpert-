@@ -29,10 +29,10 @@ public class Result {
 
 
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "result_created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "result_updated_at")
     private LocalDateTime updatedAt;
 }

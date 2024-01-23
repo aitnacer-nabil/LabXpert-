@@ -37,10 +37,10 @@ public class Test {
     @Column(name = "is_deleted", nullable = false)
     private boolean deleted;
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "test_created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "test_updated_at")
     private LocalDateTime updatedAt;
 }
 

@@ -31,10 +31,10 @@ public class Echantillon {
     private boolean assigned;
 
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "_created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "echantillons_updated_at")
     private LocalDateTime updatedAt;
     @OneToMany
     private List<ReactifAnalyse> reactifAnalyses = new ArrayList<>();
