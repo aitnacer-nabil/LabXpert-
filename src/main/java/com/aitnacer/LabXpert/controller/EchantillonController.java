@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping(Constant.BASE_API_URL +"echantillons")
 @AllArgsConstructor
 @Slf4j

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin
 @RequestMapping(Constant.BASE_API_URL +"reactif")
 @AllArgsConstructor
 public class ReactifController {

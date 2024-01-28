@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping(Constant.BASE_API_URL + "result")
 @AllArgsConstructor
 @Slf4j
