@@ -67,6 +67,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
         echantillon.setEchantillonCode(generateCode());
         echantillon.setUtilisateur(utilisateur);
+        echantillon.setAssigned(true);
         echantillon.setPatient(patient);
         echantillon.setReactifAnalyses(reactifAnalyses);
 

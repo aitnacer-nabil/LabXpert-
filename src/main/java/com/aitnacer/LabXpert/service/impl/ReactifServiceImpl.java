@@ -56,7 +56,7 @@ public class ReactifServiceImpl implements IReactifService {
             reactif.setNom(reactifdto.getNom());
         }
         if (reactifdto.getDescription() != null &&!reactifdto.getDescription().isEmpty()){
-            reactif.setNom(reactifdto.getDescription());
+            reactif.setDescription(reactifdto.getDescription());
         }
         if(reactifdto.getDateExpiration() != null && !reactifdto.getDateExpiration().isEqual(reactif.getDateExpiration())){
             reactif.setDateExpiration(reactifdto.getDateExpiration());

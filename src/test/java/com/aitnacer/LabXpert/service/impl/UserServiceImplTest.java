@@ -9,9 +9,7 @@ import com.aitnacer.LabXpert.entity.EnumSexe;
 import com.aitnacer.LabXpert.entity.UserRole;
 import com.aitnacer.LabXpert.entity.Utilisateur;
 import com.aitnacer.LabXpert.repository.UserRepository;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -65,7 +63,7 @@ class UserServiceImplTest {
                 .prenom("Doe")
                 .Adresse("456 Oak St")
                 .telephone("987654321")
-                .sexe(EnumSexe.FEMAL)
+                .sexe(EnumSexe.FEMALE)
                 .deleted(false)
                 .userName("jane.doe")
                 .password("securepass")
