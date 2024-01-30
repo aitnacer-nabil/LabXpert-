@@ -2,6 +2,7 @@ package com.aitnacer.LabXpert.controller;
 
 import com.aitnacer.LabXpert.dtos.echantillon.EchantillonRequestDto;
 import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
+import com.aitnacer.LabXpert.dtos.echantillon.EchantillonResponseDto;
 import com.aitnacer.LabXpert.entity.Echantillon;
 import com.aitnacer.LabXpert.exception.common.ApiException;
 import com.aitnacer.LabXpert.service.IEchantillonService;
@@ -27,8 +28,8 @@ public class EchantillonController {
     private final ModelMapper modelMapper;
 
     @GetMapping
-    public ResponseEntity<List<EchantillonDto>> getAllEchantillons() {
-        List<EchantillonDto> echantillons = echantillonService.getAllEchantillons();
+    public ResponseEntity<List<EchantillonResponseDto>> getAllEchantillons() {
+        List<EchantillonResponseDto> echantillons = echantillonService.getAllEchantillons();
         return ResponseEntity.ok(echantillons);
     }
 

@@ -32,12 +32,12 @@ public class EchantillonServiceImpl implements IEchantillonService {
 
 
     @Override
-    public List<EchantillonDto> getAllEchantillons() {
+    public List<EchantillonResponseDto> getAllEchantillons() {
         List<Echantillon> echantillons = echantillonRepository.findByDeletedFalse();
 
         return echantillons.stream().map((element) -> {
             System.out.println(element);
-            return modelMapper.map(element, EchantillonDto.class);
+            return modelMapper.map(element, EchantillonResponseDto.class);
         }).collect(Collectors.toList());
     }
 
@@ -51,7 +51,9 @@ public class EchantillonServiceImpl implements IEchantillonService {
     @Override
     public EchantillonDto createEchantillon(EchantillonRequestDto echantillonRequestDto) {
         log.info("Echantillon DTO {}", echantillonRequestDto);
-
+        if(echantillonRequestDto.getReactifAnalyses().size() <= 0){
+            throw new ApiException("empty List of reactifAnalyses  ",HttpStatus.NOT_ACCEPTABLE);
+        }
         List<ReactifAnalyse> reactifAnalyses = echantillonRequestDto.getReactifAnalyses().stream().map(reactifAnalyseDto -> {
             Reactif reactif = reactifRepository.findByIdReactifAndAndDeletedFalse(reactifAnalyseDto.getReactifIdReactif()).orElseThrow(() -> new ApiException("Reactif not found with  ", reactifAnalyseDto.getReactifIdReactif()));
             reactif.subQte(reactifAnalyseDto.getQuantite());
@@ -88,6 +90,7 @@ public class EchantillonServiceImpl implements IEchantillonService {
             Patient patient = patientRepository.findByIdAndDeletedFalse(echantillonRequestDto.getPatientId()).orElseThrow(() -> new ApiException("patient not found with  ", echantillonRequestDto.getPatientId()));
             echantillon.setPatient(patient);
         }
+        echantillon.setDateDeReception(echantillonRequestDto.getDateDeReception());
         echantillon.setUpdatedAt(LocalDateTime.now());
         return modelMapper.map(echantillonRepository.save(echantillon), EchantillonDto.class);
     }

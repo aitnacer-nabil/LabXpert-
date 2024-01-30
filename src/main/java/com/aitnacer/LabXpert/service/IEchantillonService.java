@@ -1,16 +1,13 @@
 package com.aitnacer.LabXpert.service;
 
-import com.aitnacer.LabXpert.dtos.echantillon.EchantillonNoUserIdDto;
-import com.aitnacer.LabXpert.dtos.echantillon.EchantillonRequestDto;
-import com.aitnacer.LabXpert.dtos.echantillon.EchantillonDto;
-import com.aitnacer.LabXpert.dtos.echantillon.EchantillonUser;
+import com.aitnacer.LabXpert.dtos.echantillon.*;
 import com.aitnacer.LabXpert.dtos.patient.PatientEchantillonDto;
 
 import java.util.List;
 
 public interface IEchantillonService {
 
-    List<EchantillonDto> getAllEchantillons();
+    List<EchantillonResponseDto> getAllEchantillons();
 
     EchantillonDto getEchantillonsById(Long id);
 

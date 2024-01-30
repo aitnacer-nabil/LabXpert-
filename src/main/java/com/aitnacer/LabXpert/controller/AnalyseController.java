@@ -1,5 +1,6 @@
 package com.aitnacer.LabXpert.controller;
 
+import com.aitnacer.LabXpert.dtos.analyse.AnalyseRequestDto;
 import com.aitnacer.LabXpert.dtos.AnalyseDto;
 import com.aitnacer.LabXpert.dtos.TestDto;
 import com.aitnacer.LabXpert.dtos.TypeAnalyseDto;
@@ -36,6 +37,11 @@ public class AnalyseController {
     public ResponseEntity<AnalyseDto> createAnalyse(@Valid @RequestBody AnalyseDto analyseDto) {
         AnalyseDto createdAnalyse = analyseService.createAnalyse(analyseDto);
         return new ResponseEntity<>(createdAnalyse, HttpStatus.CREATED);
+    }
+    @PostMapping("/all")
+    public ResponseEntity createAnalyse(@Valid @RequestBody AnalyseRequestDto analyseRequestDto) {
+        analyseService.creatAnalyse(analyseRequestDto);
+        return new ResponseEntity( HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

@@ -25,3 +25,4 @@ public class ReactifDto implements Serializable {
     Long fournisseurIdFournisseur;
     boolean deleted;
 }
+//TODO handl validation rectifanalyse
