@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @CrossOrigin
 @RequestMapping(Constant.BASE_API_URL +"scheduling")
@@ -32,4 +35,10 @@ public class SchedulingController {
         log.info("Created Scheduling Response: {}", schedulingResponseDto);
 
         return new ResponseEntity<>(schedulingResponseDto, HttpStatus.CREATED);    }
+    @GetMapping
+    public ResponseEntity<List<SchedulingResponseDto>> getAllSchedulingResponse(){
+        List<SimpleAnalyse> simpleAnalyse = simpleAnalyseService.getAllSimpleAnalyses();
+        List<SchedulingResponseDto> schedulingResponseDtos = simpleAnalyse.stream().map((element) -> modelMapper.map(element, SchedulingResponseDto.class)).collect(Collectors.toList());
+        return  new ResponseEntity<>(schedulingResponseDtos,HttpStatus.OK);
+    }
 }

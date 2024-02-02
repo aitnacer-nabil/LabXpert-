@@ -1,6 +1,7 @@
 package com.aitnacer.LabXpert.dtos.scheduling;
 
 import com.aitnacer.LabXpert.dtos.reactif.ReactifQteDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import java.util.List;
 public class SchedulingRequestDto implements Serializable {
     Long id;
     @NotNull(message = "Start date cannot be null")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     LocalDateTime dateDebut;
     String Commentaire;
     @NotNull(message = "Utilisateur ID cannot be null")

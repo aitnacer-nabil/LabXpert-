@@ -42,4 +42,5 @@ public class SimpleAnalyse {
     private List<Result> results= new ArrayList<>();
     @OneToMany
     private List<Reactif> reactifs  = new ArrayList<>();
+    private boolean hasResult;
 }
