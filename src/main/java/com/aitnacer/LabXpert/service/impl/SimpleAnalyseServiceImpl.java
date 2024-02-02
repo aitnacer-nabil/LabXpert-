@@ -58,4 +58,9 @@ public class SimpleAnalyseServiceImpl implements ISimpleAnalyseService {
         //TODO getSimpleAnalysesByUtilisateur
         return null;
     }
+
+    @Override
+    public List<SimpleAnalyse> getAllSimpleAnalyseHasResult() {
+        return simpleAnalyseRepository.findByHasResultTrue();
+    }
 }

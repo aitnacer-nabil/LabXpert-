@@ -16,4 +16,5 @@ public interface ISimpleAnalyseService {
     SimpleAnalyse updateSimpleAnalyse(SimpleAnalyse simpleAnalyse);
 
     List<SimpleAnalyse> getSimpleAnalysesByUtilisateur(Utilisateur utilisateur);
+    List<SimpleAnalyse> getAllSimpleAnalyseHasResult();
 }
