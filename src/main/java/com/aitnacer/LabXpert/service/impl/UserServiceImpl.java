@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-
+    private final  PasswordEncoder passwordEncoder;
 
     public List<UtilisateurDto> getAllUtilisateur(){
         List<Utilisateur> utilisateurs = userRepository.findByDeletedFalse();
@@ -36,6 +37,7 @@ public class UserServiceImpl implements IUserService {
         // TODO verification for administrateur
         Utilisateur utilisateur = modelMapper.map(utilisateurDto, Utilisateur.class);
         System.out.println(utilisateur);
+        utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         Utilisateur administrateurSaved  = userRepository.save(utilisateur);
         return  modelMapper.map(administrateurSaved, UtilisateurDto.class);
 
@@ -61,5 +63,10 @@ public class UserServiceImpl implements IUserService {
         Utilisateur utilisateur = userRepository.findByIdAndDeletedFalse(id).orElseThrow(new ApiException(String.format("No User found for this id : %s",id),HttpStatus.BAD_REQUEST));
         utilisateur.setDeleted(true);
         userRepository.save(utilisateur);
+    }
+
+    @Override
+    public Utilisateur loadUserByEmail(String userName) {
+        return userRepository.findByUserNameAndDeletedFalse(userName).orElse(null);
     }
 }
