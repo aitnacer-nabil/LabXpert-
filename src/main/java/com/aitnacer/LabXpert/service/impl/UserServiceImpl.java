@@ -35,10 +35,12 @@ public class UserServiceImpl implements IUserService {
     }
     public UtilisateurDto createUtilisateur(UtilisateurDto utilisateurDto){
         // TODO verification for administrateur
+        log.info("UtilisateurDTO  {}",utilisateurDto);
         Utilisateur utilisateur = modelMapper.map(utilisateurDto, Utilisateur.class);
-        System.out.println(utilisateur);
+        log.info("Utilisateur Map {}",utilisateur);
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         Utilisateur administrateurSaved  = userRepository.save(utilisateur);
+        log.info("Utilisateur Saved {}",administrateurSaved);
         return  modelMapper.map(administrateurSaved, UtilisateurDto.class);
 
     }

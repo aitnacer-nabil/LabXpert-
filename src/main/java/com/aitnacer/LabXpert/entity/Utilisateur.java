@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Utilisateur extends UtilisateurInfo implements UserDetails {
     @NotNull(message = "The username should not be null!")
+    @Column(name = "username",unique = true)
     private String userName;
     @NotNull(message = "The password should not be null!")
     @NotBlank(message = "The password should not be blank!")
@@ -31,6 +32,7 @@ public class Utilisateur extends UtilisateurInfo implements UserDetails {
 
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -38,7 +40,7 @@ public class Utilisateur extends UtilisateurInfo implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return userName;
     }
 
     @Override
