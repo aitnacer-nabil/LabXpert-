@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class ResultController {
     private final ModelMapper modelMapper;
 
     @PostMapping("/sample-analyse/{sampleAnalyseId}")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<SimpleAnalyseResponseDto> createAnalyse(@PathVariable(name = "sampleAnalyseId") long sampleAnalyseId, @Valid @RequestBody ResultRequestDto resultRequestDto) {
         log.info("requestBody {} ", resultRequestDto);
         SimpleAnalyse simpleAnalyse = simpleAnalyseService.getSimpleAnalyseById(sampleAnalyseId);
@@ -49,11 +51,13 @@ public class ResultController {
         return ResponseEntity.ok(modelMapper.map(updatedSimpleAnalyse, SimpleAnalyseResponseDto.class));
     }
     @GetMapping("/sample-analyse/{sampleAnalyseId}")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public  ResponseEntity<ResultResponseDto> getResultById(@PathVariable(name = "sampleAnalyseId") long sampleAnalyseId){
         SimpleAnalyse simpleAnalyse = simpleAnalyseService.getSimpleAnalyseById(sampleAnalyseId);
         return  new ResponseEntity<>(modelMapper.map(simpleAnalyse, ResultResponseDto.class), HttpStatus.OK);
     }
     @GetMapping("/sample-analyse/")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public  ResponseEntity<List<ResultResponseDto>> getAllresult(){
         List<SimpleAnalyse> simpleAnalyse = simpleAnalyseService.getAllSimpleAnalyseHasResult();
         List<ResultResponseDto> responseDtoList = simpleAnalyse.stream().map((element) -> modelMapper.map(element, ResultResponseDto.class)).collect(Collectors.toList());

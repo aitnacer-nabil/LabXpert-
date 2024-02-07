@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,18 +29,21 @@ public class EchantillonController {
     private final ModelMapper modelMapper;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<List<EchantillonResponseDto>> getAllEchantillons() {
         List<EchantillonResponseDto> echantillons = echantillonService.getAllEchantillons();
         return ResponseEntity.ok(echantillons);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<EchantillonDto> getEchantillonsById(@PathVariable Long id) {
         EchantillonDto echantillon = echantillonService.getEchantillonsById(id);
         return ResponseEntity.ok(echantillon);
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<EchantillonDto> createEchantillon(@RequestBody EchantillonRequestDto echantillonRequestDto) {
 
         log.info("EchantillonRequest{} ",echantillonRequestDto);
@@ -48,6 +52,7 @@ public class EchantillonController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<EchantillonDto> updateEchantillon(
             @PathVariable Long id,
             @RequestBody EchantillonDto echantillonRequestDto
@@ -58,6 +63,7 @@ public class EchantillonController {
 
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('RESPONSABLE')")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
         Map<String, Object> response = new HashMap<>();
         echantillonService.deleteEchantillon(id);

@@ -7,4 +7,5 @@ public class Constant {
     public final static String BEARER_PREFIX = "Bearer ";
     public final static long EXPIRE_ACCESS_TOKEN = 10*60*1000;//10 min to millis
     public final static long EXPIRE_REFRESH_TOKEN = 120*60*1000;//2 hours
+    public static final String AUTH_HEADER = "Authorization";
 }

@@ -29,7 +29,7 @@ public class JWTHelper {
                 .sign(algorithm);
 
     }
-    public String ExtractTokenFromHeaderIfExists(String authorizationHeader){
+    public String extractTokenFromHeaderIfExists(String authorizationHeader){
         if(authorizationHeader != null && authorizationHeader.startsWith(BEARER_PREFIX)){
             return  authorizationHeader.substring(BEARER_PREFIX.length());
         }

@@ -6,6 +6,7 @@ import com.aitnacer.LabXpert.utils.Constant;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,26 +22,31 @@ public class FournisseurController {
     IFournisseurService fournisseurService;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<List<FournisseurDTO>> getAllFournisseur(){
         return ResponseEntity.ok(fournisseurService.getAllFournisseur());
     }
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<FournisseurDTO> getFournisseurById(@PathVariable(name = "id") Long id) {
         FournisseurDTO fournisseurDTO = fournisseurService.getFournisseurById(id);
         return ResponseEntity.ok(fournisseurDTO);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('RESPONSABLE')")
     public ResponseEntity<FournisseurDTO> createFournisseur( @RequestBody FournisseurDTO fournisseurDTO) {
         FournisseurDTO fournisseurDTO1 = fournisseurService.createFournisseur(fournisseurDTO);
         return new ResponseEntity<>(fournisseurDTO1, HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('RESPONSABLE')")
     public ResponseEntity<FournisseurDTO> updateFournisseur(@PathVariable("id") Long id,  @RequestBody FournisseurDTO fournisseurDTO)  {
         return ResponseEntity.ok(fournisseurService.updateFournisseur(id, fournisseurDTO));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('RESPONSABLE')")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable("id") Long id)  {
         Map<String, Object> response = new HashMap<>();
         fournisseurService.deleteFournisseur(id);

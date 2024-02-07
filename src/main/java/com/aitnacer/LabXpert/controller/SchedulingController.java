@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class SchedulingController {
     private final ModelMapper modelMapper;
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<SchedulingResponseDto>  createScheduling(@RequestBody  SchedulingRequestDto schedulingRequestDto){
         log.info("Received Scheduling Request: {}", schedulingRequestDto);
         SimpleAnalyse simpleAnalyse = simpleAnalyseService.createSimpleAnalyse(schedulingRequestDto);
@@ -36,6 +38,7 @@ public class SchedulingController {
 
         return new ResponseEntity<>(schedulingResponseDto, HttpStatus.CREATED);    }
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
     public ResponseEntity<List<SchedulingResponseDto>> getAllSchedulingResponse(){
         List<SimpleAnalyse> simpleAnalyse = simpleAnalyseService.getAllSimpleAnalyses();
         List<SchedulingResponseDto> schedulingResponseDtos = simpleAnalyse.stream().map((element) -> modelMapper.map(element, SchedulingResponseDto.class)).collect(Collectors.toList());
