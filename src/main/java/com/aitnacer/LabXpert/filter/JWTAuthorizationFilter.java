@@ -36,6 +36,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
             JWTVerifier jwtVerifier = JWT.require(algorithm).build();
             //TODO exption jandle verification
+            //TODO EXception The Token has expired on 2024-02-07T22:03:18Z.
             DecodedJWT decodedJWT = jwtVerifier.verify(accessToken);
             String email = decodedJWT.getSubject();
             String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
