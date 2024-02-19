@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.aitnacer</groupId>
 	<artifactId>LabXpert</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>LabXpert</name>
 	<description>LabXpert - l&apos;API REST via Spring Boot</description>
 	<properties>

@@ -55,17 +55,5 @@ public class AppConfig {
 
         return objectMapper;
     }
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
 
-        // Allow all origins, headers, and methods for simplicity. You may want to restrict these in a production environment.
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
 }

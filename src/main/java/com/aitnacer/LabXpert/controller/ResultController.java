@@ -37,7 +37,7 @@ public class ResultController {
 
     @PostMapping("/sample-analyse/{sampleAnalyseId}")
     @PreAuthorize("hasAnyAuthority('RESPONSABLE','TECHNICIEN')")
-    public ResponseEntity<SimpleAnalyseResponseDto> createAnalyse(@PathVariable(name = "sampleAnalyseId") long sampleAnalyseId, @Valid @RequestBody ResultRequestDto resultRequestDto) {
+    public ResponseEntity<SimpleAnalyseResponseDto> setReuslt(@PathVariable(name = "sampleAnalyseId") long sampleAnalyseId, @Valid @RequestBody ResultRequestDto resultRequestDto) {
         log.info("requestBody {} ", resultRequestDto);
         SimpleAnalyse simpleAnalyse = simpleAnalyseService.getSimpleAnalyseById(sampleAnalyseId);
         List<Result> results = new ArrayList<>();
